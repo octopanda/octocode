@@ -1,0 +1,51 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+</head>
+<body>
+<!--
+	Professional JavaScript for Web Developers
+	Chapter Eight
+	The Browser Object Model
+-->
+<!-- 
+	// Define a variable or a function in global scope.
+	var age = 29;
+	function sayAge(){
+		alert(this.age)
+	}
+	alert(window.age);	// 29
+	sayAge();			// 29
+	window.sayAge();	// 29
+-->
+<!--
+	// Difference between global variable and property on window.
+	var age = 29;
+	window.color = "red";
+	// throw an error in IE < 9, return false in all other browsers
+	delete age;
+	// throw an error in IE < 9, return true in all other browsers
+	delete window.color;
+	alert(age);
+	alert(window.color);
+
+	// this throws an error because oldValue is undeclared
+	var newValue = oldValue;
+	// this doesn't throw an error, because it's a property lookup
+	// newValue = window.oldValue
+	var newValue = window.oldValue;
+-->
+<script>
+
+</script>
+<frameset rows="160,*">
+	<frame name="topFrame" src="top.html"></frame>
+	<frameset cols="50%, 80%">
+		<frame name="leftFrame" src="left.html"></iframe>
+		<frame name="rightFrame" src="right.html"></iframe>
+	</frameset>
+</frameset>
+</body>
+</html>
