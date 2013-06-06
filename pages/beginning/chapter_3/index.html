@@ -11,19 +11,157 @@
 	Decisions, Loops, and Functions
 -->
 <!-- The if statement.
-<script>
-	var degFahren = Number(prompt("Enter the degrees Fahrenheit", 32));
-	var degCent;
-	degCent = 5 / 9 * (degFahren - 32);
-	document.write(degFahren + "\xB0 Fahrenheit is " + degCent + "\xB0 Centigrade<br />");
-	if (degCent < 0) {
-		document.write("That's below the freezing point of water.");
-	}
-	if (degCent == 100) {
-		document.write("That's the boiling point of water.");
-	}
-</script>
+	<script>
+		var degFahren = Number(prompt("Enter the degrees Fahrenheit", 32));
+		var degCent;
+		degCent = 5 / 9 * (degFahren - 32);
+		document.write(degFahren + "\xB0 Fahrenheit is " + degCent + "\xB0 Centigrade<br />");
+		if (degCent < 0) {
+			document.write("That's below the freezing point of water.");
+		}
+		if (degCent == 100) {
+			document.write("That's the boiling point of water.");
+		}
+	</script>
 -->
-
+<!-- Multiple conditions.
+	<script>
+		var myAge = Number(prompt("Enter your age", 30));
+		if (myAge >= 0 && myAge <= 10) {
+			document.write("myAge is between 0 and 10<br />");
+		}
+		if (!(myAge >= 0 && myAge <= 10)){
+			document.write("myAge is NOT between 0 and 10<br />");
+		}
+		if (myAge >= 80 || myAge <= 10) {
+			document.write("myAge is 80 or above OR 10 or below<br />");
+		}
+		if ((myAge >= 30 && myAge <= 39) || (myAge >= 80 && myAge <= 89)) {
+			document.write("myAge is between 30 and 39 OR myAge is between 80 and 89");
+		}
+	</script>
+-->
+<!-- Using the switch statement.
+	<script>
+		var secretNumber = parseInt(prompt("Pick a number between 1 and 5:", ""));
+		switch (secretNumber) {
+			case 1:
+			case 2:	
+				document.write("Too low!");
+				break;
+			case 3:
+				document.write("You guessed the secret number!");
+				break;
+			case 4:
+			case 5:
+				document.write("Too high!");
+				break;
+			default:
+				document.write("You did not enter a number 1 and 5.");
+				break;
+		}
+	</script>
+-->
+<!-- Converting a series of Fahrenheit values
+	<script>
+		var degFahren = new Array(212, 32, -459.15);
+		var degCent = new Array();
+		var loopCounter;
+		for (loopCounter = 0; loopCounter <= 2; loopCounter++) {
+			degCent[loopCounter] = 5 / 9 * (degFahren[loopCounter] - 32);
+		}
+		for (loopCounter = 2; loopCounter >= 0; loopCounter--) {
+			document.write("Value " + loopCounter + " was " + degFahren[loopCounter] + " degrees Fahrenheit");
+			document.write(" which is " + degCent[loopCounter] + " degrees Centigrade.<br />");
+		}
+	</script>
+-->
+<!-- The while loop.
+	<script>
+		var degCent = new Array();
+		var degFahren = new Array(34, 123, 212);
+		var loopCounter = 0;
+		while (loopCounter < 3) {
+			degCent[loopCounter] = 5 / 9 * (degFahren[loopCounter] - 32);
+			document.write(degCent[loopCounter] + "<br />");
+			loopCounter++;
+		}
+	</script>
+-->
+<!-- The do...while loop.
+	<script>
+		var userAge;
+		do {
+			userAge = prompt("Please enter your age", "");
+		} while (isNaN(userAge) == true);
+	</script>
+-->
+<!-- The break statement.
+	<script>
+		var degFahren = new Array(212, "string data", -459.67);
+		var degCent = new Array();
+		var loopCounter;
+		for (loopCounter = 0; loopCounter < degFahren.length; loopCounter++) {
+			if (isNaN(degFahren[loopCounter])) {
+				alert("Data '" + degFahren[loopCounter] + "' at array index " + loopCounter + " is invalid");
+				break;
+			}
+			degCent[loopCounter] = 5 / 9 * (degFahren[loopCounter] - 32);
+			document.write(degCent[loopCounter] + "<br />");
+		}
+	</script>
+-->
+<!-- The continue statement.
+	<script>
+		var degFahren = new Array(212, "string data", -459.67);
+		var degCent = new Array();
+		var loopCounter;
+		for (loopCounter = 0; loopCounter < degFahren.length; loopCounter++) {
+			if (isNaN(degFahren[loopCounter])) {
+				alert("Data '" + degFahren[loopCounter] + "' at array index " + loopCounter + " is invalid");
+				continue;
+			}
+			degCent[loopCounter] = 5 / 9 * (degFahren[loopCounter] - 32);
+			document.write(degCent[loopCounter] + "<br />");
+		}
+	</script>
+-->
+<!-- Fahrenheit to Centigrade function.
+	<script>
+		function convertToCentigrade(degFahren) {
+			return 5 / 9 * (degFahren - 32);
+		}
+		var degFahren = [212, 32, -459.15];
+		var degCent = [];
+		for (var i = 0; i < degFahren.length; i++) {
+			degCent[i] = convertToCentigrade(degFahren[i]);
+		}
+		for (var i = degFahren.length - 1; i >= 0; i--) {
+			document.write("Value " + i + " was " + degFahren[i] + " degrees Fahrenheit");
+			document.write(" which is " + degCent[i] + " degrees Centigrade.<br />");
+		}
+	</script>
+-->
+<!-- Multiplication table.
+	<script>
+		(function() {
+			var num = parseInt(prompt("Please enter the Multiplier:", ""));
+			var start = parseInt(prompt("Please enter the start number", ""));
+			var end = parseInt(prompt("Please enter the end number", ""));
+			if (!num || !start || !end) {
+				alert("Parameter is not a number.");
+				arguments.callee();
+			} else if (start < end) {
+				for (var i = start; i <= parseInt(end); i++) {
+					document.write(num + " * " + i + " = " + (num * i) + "<br />");
+				}
+			} else {
+				for (var i = start; i >= parseInt(end); i--) {
+					document.write(num + " * " + i + " = " + (num * i) + "<br />");
+				}
+			}
+		})();
+	</script>
+-->
 </body>
 </html>
