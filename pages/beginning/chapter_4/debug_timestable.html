@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>Debug: Times Table</title>
+	<script>
+		function writeTimesTable(timesTable) {
+			var counter;
+			var writeString;
+			for(counter = 1; counter < 12; counter++) {
+				writeString = counter + " * " + timesTable + " = ";
+				writeString = writeString + (timesTable * counter);
+				writeString = writeString + "<br />";
+				document.write(writeString);
+			}
+		}
+	</script>
+</head>
+<body>
+<script>
+	writeTimesTable(2);
+</script>
+</body>
+</html>

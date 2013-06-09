@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>Debugging: Callstack</title>
+	<script>
+		function firstCall() {
+			secondCall();
+		}
+		function secondCall() {
+			thirdCall();
+		}
+		function thirdCall() {
+			//
+		}
+		function button1_onclick() {
+			debugger
+			firstCall();
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="Button" name="button1" onclick="button1_onclick()" />
+</body>
+</html>

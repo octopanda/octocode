@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />	
+</head>
+<body>
+<!-- Try … catch and throwing errors.
+	<script>
+		function butCalculate_onclick() {
+			try {
+				if (null == window.top.calcFactorial) {
+					throw "This page is not loaded within the correct frameset";
+				}
+				if (document.form1.txtNum1.value == "") {
+					throw "!Please enter a value before you calculate its factorial.";
+				}
+				if (isNaN(document.form1.txtNum1.value)) {
+					throw "!Please enter a valid number.";
+				}
+				if (document.form1.txtNum1.value < 0) {
+					throw "!Please enter a positive number."
+				}
+				document.form1.txtResult.value = window.parent.calcFactorial(document.form1.txtNum1.value);
+			} catch(exception) {
+				if(typeof(exception) == "string") {
+					if(exception.charAt(0) == "!") {
+						alert(exception.substr(1));
+						document.form1.txtNum1.focus();
+						document.form1.txtNum1.select();
+					} else {
+						alert(exception);
+					}
+				} else {
+					alert("The following error occurred " + exception.message);
+				}
+				document.form1.txtResult.value = "";
+			}
+		}
+	</script>
+-->
+<!-- Nested try...catch statements.
+	<script>
+		function butCalculate_onclick() {
+			try {
+				try {
+					if (null == window.top.calcFactorial) {
+						throw "This page is not loaded within the correct frameset";
+					}
+					if (document.form1.txtNum1.value == "") {
+						throw "!Please enter a value before you calculate its factorial.";
+					}
+					if (isNaN(document.form1.txtNum1.value)) {
+						throw "!Please enter a valid number.";
+					}
+					if (document.form1.txtNum1.value < 0) {
+						throw "!Please enter a positive number."
+					}
+					document.form1.txtResult.value = window.parent.calcFactorial(document.form1.txtNum1.value);
+				} catch(exception) {
+					if(typeof(exception) == "string" && exception.charAt(0) == "!") {
+						alert(exception.substr(1));
+						document.form1.txtNum1.focus();
+						document.form1.txtNum1.select();					
+					} else {
+						throw exception;
+					}
+					document.form1.txtResult.value = "";
+				}		
+			} catch(exception) {
+				switch(exception) {
+					case "This page is not loaded within the correct frameset":
+						alert(exception);
+						break;
+					default:
+						alert("The following critical error has occurred \n" + exception);
+						break;					
+				}
+				document.form1.txtResult.value = "";				
+			}
+		}
+	</script>
+-->
+<form action="" name="form1">
+	<input type="text" name="txtNum1" size="3" /> factorial is 
+	<input type="text" name="txtResult" size="25" />
+	<input type="button" value="Calculate Factorial" name="butCalculate" onclick="butCalculate_onclick()" />
+</form>
+</body>
+</html>

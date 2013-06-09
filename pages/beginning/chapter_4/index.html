@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+</head>
+<body>
+<!--
+	Beginning JavaScript
+	Chapter Four
+	Common Mistakes, Debugging, and Error Handling
+-->
+<!-- Undefined variables.
+	<script>
+		alert(abc);								// Uncaught ReferenceError: abc is not defined.
+		function foo(parametrOne) {
+			alert(parameterOne);				// Uncaught ReferenceError: parameterOne is not defined.
+		}
+		foo();
+	</script>
+-->
+<!-- Case sensitivity.
+	<script>
+		var myName = "Jeremy";
+		If(myName == "Jeremy")					// Uncaught ReferenceError: If is not defined.
+			alert(myName.toUppercase());		// Uncaught TypeError: Object Jeremy has no method 'toUppercase'.
+	</script>
+-->
+<!-- Incorrect Number of Closing Braces.
+	<script>
+		function myFunction() {					// Uncaught SyntaxError: Unexpected end of input.
+			x = 1;
+			y = 2;
+			if (x <= y) {
+				if (x == y) {
+					alert("x equals y");
+				}
+			}
+			myFunction();
+	</script>
+-->
+<!-- Incorrect Number of Closing Parentheses.
+	<script>
+		var myVariable, myOtherVariable, myString = "";
+		// Uncaught SyntaxError: Invalid regular expression: missing /.
+		if (myVariable + 12) / myOtherVariable < myString.length) {}
+	</script>
+-->
+<!-- Using equals (=) rather than is equal to (==).
+	<script>
+		var myNumber = 99;
+		if (myNumber = 101) {					// using equals rather than is equal to.
+			alert("myNumber is 101");
+		} else {
+			alert("myNumber is " + myNumber);
+		}
+	</script>
+-->
+<!-- Using a method as a property and vice versa.
+	<script>
+		var nowDate = new Date();
+		alert(nowDate.getMonth);					// return function getMonth() {[native code]}
+		function foo() {
+			alert("I'm in foo()!");
+		}
+		function bar(fpToCall) {
+			alert("Calling passed function");
+			fpToCall();
+		}
+		bar(foo);
+	</script>
+-->
+<!-- Missing plus signs during concatenation.
+	<script>
+		var myName = "Jeremy";
+		var myString = "Hello";
+		var myOtherString = "World";
+		// Uncaught SyntaxError: Unexpected identifier.
+		myString = myName + " said " + myString + " " myOtherString;
+		alert(myString);
+	</script>
+-->
+<!-- The try...catch statements.
+	<script>
+		try {
+			alert("This is code inside the try clause");
+			// alert("No Errors so catch code will not execute");
+			ablert("No Errors so catch code will not execute");
+			// alert('This code won't work');			// Uncaught SyntaxError: Unexpected identifier.
+		} catch(exception) {
+			alert("The error is " + exception.message);
+		}
+	</script>
+-->
+<!-- Nested try...catch statements.
+	<script>
+		try {
+			try {
+				ablurt("This code has an error");
+			} catch(exception) {
+				var eName = exception.name;
+				if (eName == "TypeError" || eName == "ReferenceError") {
+					alert("Inner try...catch can deal with this error");
+				} else {
+					throw exception;
+				}
+			}
+		} catch(exception) {
+			alert("Error the inner try...catch could not handle occurred");
+		}
+	</script>
+-->
+<!-- finally Clauses.
+	<script>
+		try {
+			ablurt("An exception will occur");
+		} catch(exception) {
+			alert("Exception occurred");
+		} finally {
+			alert("Whatever happens this line will execute");
+		}
+	</script>
+-->
+<!-- Exercise question one.
+	<script>
+		function writeTimesTable(timesTable) {
+			var counter;
+			var writeString;
+			for(counter = 1; counter <= 12; counter++) {
+				writeString = counter + " * " + timesTable + " = ";
+				writeString = writeString + (timesTable * counter);
+				writeString = writeString + "<br />";
+				document.write(writeString);
+			}
+		}
+		var timesTable;
+		for(timesTable = 1; timesTable <= 12; timesTable++) {
+			document.write("<p>");
+			writeTimesTable(timesTable);
+			document.write("</p>");
+		}
+	</script>
+-->
+<!-- Exercise question two.
+	<script>
+		function checkForm(theForm) {
+			var formValid = true;
+			var elementCount = 0;
+			while(elementCount < theForm.length) {							// "=<=" to "<"
+				if(theForm.elements[elementCount].type == "text") {			// "elementcount" to "elementCount"
+					if(theForm.elements[elementCount].value == "") {		// ".value() =" to ".value ==", add "{"
+						alert("Please complete all form elements");
+						theForm.elements[elementCount].focus();				// ".focus" to ".focus()"		
+						formValid = false;
+						break;
+					}														// add "}"
+				}
+				elementCount++;												// add elementCount++
+			}
+			return formValid;
+		}
+	</script>
+	<form name="form1" onsubmit="return checkForm(document.form1)" action="">
+		<input type="text" id="text1" name="text1" />
+		<br />
+		CheckBox 1 <input type="checkbox" id="checkbox2" name="checkbox2" />
+		<br />
+		CheckBox 1 <input type="checkbox" id="checkbox1" name="checkbox1" />
+		<br />
+		<input type="text" id="text2" name="text2" />
+		<p>
+			<input type="submit" value="Submit" id="submit1" name="submit1" />
+		</p>
+	</form>
+-->
+</body>
+</html>

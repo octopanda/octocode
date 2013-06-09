@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+</head>
+<body>
+<!--
+	Beginning JavaScript
+	Chapter Five
+	JavaScript - An Object-Based Language
+-->
+<!-- Creating an object
+	<script>
+		var myArrayRef = new Array(0, 1, 2);
+		var mySecondArrayRef = myArrayRef;
+		myArrayRef[0] = 100;
+		alert(mySecondArrayRef);						// 100, 1, 2
+
+		var myArrayRef = new Array(0, 1, 2);
+		var mySecondArrayRef = myArrayRef.concat();
+		myArrayRef[0] = 100;
+		alert(mySecondArrayRef);						// 0, 1, 2
+
+		var myVariable = "ABC";
+		var mySecondVariable = myVariable;
+		myVariable = "DEF";
+		alert(mySecondVariable);						// ABC
+
+		var myString = new Object();
+		myString.a = "ABC";
+		var mySecondString = myString;
+		myString.a = "DEF";
+		alert(mySecondString.a);						// DEF
+
+		var myString = new Object("ABC");
+		var mySecondString = myString;
+		myString = "DEF";
+		alert(mySecondString);							// ABC
+	</script>
+-->
+<!-- Finding a string inside another string.
+	<script>
+		var myString = "Hello jeremy. How are you jeremy";
+		var foundAtPosition;
+		foundAtPosition = myString.indexOf("jeremy");
+		alert(foundAtPosition);
+		foundAtPosition = myString.lastIndexOf("jeremy");
+		alert(foundAtPosition);
+	</script>
+-->
+<!-- Counting occurrences of substrings.
+	<script>
+		var myString = "Welcome to Wrox books. The Wrox website is www.wrox.com. Visit the Wrox website today. Thanks for buying Wrox";
+		var foundAtPosition = 0;
+		var wroxCount = 0;
+		while(foundAtPosition != -1) {
+			foundAtPosition = myString.indexOf("Wrox", foundAtPosition);
+			console.log(foundAtPosition);
+			if(foundAtPosition != -1) {
+				wroxCount++;
+				foundAtPosition++;
+			}
+		}
+		document.write("There are " + wroxCount + " occurrences of the word Wrox");
+	</script>
+	<script>
+		var myString = "Welcome to Wrox books. The Wrox website is www.wrox.com. Visit the Wrox website today. Thanks for buying Wrox";
+		var foundAtPosition = myString.length - 1;
+		var wroxCount = 0;
+		while(foundAtPosition != -1) {
+			foundAtPosition = myString.lastIndexOf("Wrox", foundAtPosition);
+			console.log(foundAtPosition);
+			if(foundAtPosition != -1) {
+				wroxCount++;
+				foundAtPosition--;
+			}
+		}
+		document.write("There are " + wroxCount + " occurrences of the word Wrox");
+	</script>
+-->
+<!-- Copying part of a string.
+	<script>
+		var myString = "JavaScript";
+		var mySubString = myString.substring(0,4);
+		document.write(mySubString);
+	</script>
+	<script>
+		var myString = "JavaScript";
+		var mySubString = myString.substr(0,4);
+		document.write(mySubString);
+	</script>
+	<script>
+		var fileName = window.location.href;
+		var fileName = fileName.substr(fileName.lastIndexOf("/") + 1);
+		document.write("The file name of this page is " + fileName);
+	</script>
+-->
+<!-- Converting Case.
+	<script>
+		var myString = "I Don't Care About Case.";
+		if(myString.toLowerCase() == "i don't care about case.") {
+			alert(myString.toUpperCase());
+		}
+	</script>
+-->
+
+</body>
+</html>
