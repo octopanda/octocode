@@ -39,7 +39,7 @@
 		alert(mySecondString);							// ABC
 	</script>
 -->
-<!-- Finding a string inside another string.
+<!-- Finding a string inside another string - the indexOf() and lastIndexOf() methods.
 	<script>
 		var myString = "Hello jeremy. How are you jeremy";
 		var foundAtPosition;
@@ -79,7 +79,7 @@
 		document.write("There are " + wroxCount + " occurrences of the word Wrox");
 	</script>
 -->
-<!-- Copying part of a string.
+<!-- Copying part of a string - the substr() and substring() methods.
 	<script>
 		var myString = "JavaScript";
 		var mySubString = myString.substring(0,4);
@@ -96,7 +96,7 @@
 		document.write("The file name of this page is " + fileName);
 	</script>
 -->
-<!-- Converting Case.
+<!-- Converting Case - the toLowerCase() and toUpperCase() methods.
 	<script>
 		var myString = "I Don't Care About Case.";
 		if(myString.toLowerCase() == "i don't care about case.") {
@@ -104,7 +104,7 @@
 		}
 	</script>
 -->
-<!-- Selecting a single character from a string.
+<!-- Selecting a single character from a string - the charAt() and charCodeAt() methods.
 	<script>
 		var myString = prompt("Enter some text", "Hello World!");
 		var theLastChar = myString.charAt(myString.length - 1);
@@ -146,7 +146,7 @@
 		}
 	</script>
 -->
-<!-- Converting character code to a string.
+<!-- Converting character code to a string - the fromCharCode() method.
 	<script>
 		var myString = "";
 		var charCode;
@@ -154,6 +154,167 @@
 			myString += String.fromCharCode(charCode);
 		}
 		document.write(myString);								// 0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz
+	</script>
+-->
+<!-- Finding out how many elements are in an array - the length property.
+	<script>
+		var names = new Array();
+		names[0] = "Paul";
+		names[1] = "Jeremy";
+		names[11] = "Nick";
+		document.write("The last name is " + names[names.length - 1]);
+		alert("names[-1]: " + names[-1] + ", names[2]: " + names[2] + ", names[12]: " + names[12] + ". ");
+	</script>
+-->
+<!-- Joining arrays - the concat() method.
+	<script>
+		var names = new Array("Paul", "Jeremy", "Nick");
+		var ages = new Array(31, 30, 31);
+		var jobs = new Array("JSer", "Java Engineer", ".Net Engineer");
+		var concatArray = names.concat(ages, jobs);
+		console.log(concatArray);
+	</script>
+-->
+<!-- Copying part of an array - the slice() method.
+	<script>
+		var names = new Array("Paul", "Sarah", "Jeremy", "Adam", "Bob");
+		var slicedArray = names.slice(1, 3);
+		console.log(slicedArray);
+	</script>
+-->
+<!-- Converting an array into a single string - the join() method.
+	<script>
+		var myShopping = new Array("Eggs", "Milk", "Potatoes", "Cereal", "Banana");
+		var myShoppingList = myShopping.join("<br />");
+		document.write(myShoppingList);
+	</script>
+-->
+<!-- Putting your array in order - the sort() method.
+	<script>
+		var names = new Array("Paul", "Sarah", "Jeremy", "Adam", "Bob");
+		var elementIndex;
+		names.sort();
+		document.write("Now the names again in order" + "<br />");
+		for(elementIndex = 0; elementIndex < names.length; elementIndex++) {
+			document.write(names[elementIndex] + "<br />");
+		}
+	</script>
+	<script>
+		var arr = [10, 5, 40, 25, 1000, 1, "d"];
+		arr.sort(function(){ return arguments[0] - arguments[1]; });
+		console.log(arr);
+	</script>
+-->
+<!-- Putting your array into reverse order - the reverse() method.
+	<script>
+		var myShopping = new Array("Eggs", "Milk", "Potatoes", "Cereal", "Banana");
+		myShopping.reverse();
+		var myShoppingList = myShopping.join("<br />");
+		document.write(myShoppingList);
+	</script>
+-->
+<!-- Sorting an array.
+	<script>
+		var myShopping = new Array("Eggs", "Milk", "Potatoes", "Cereal", "Banana");
+		var ord = prompt("Enter 1 for alphabetical order, and -1 for reverse order", 1);
+		if(1 == ord) {
+			myShopping.sort();
+			document.write(myShopping.join("<br />"));
+		} else if(-1 == ord) {
+			myShopping.sort();
+			myShopping.reverse();
+			document.write(myShopping.join("<br />"));
+		} else {
+			document.write("That is not a valid input");
+		}
+	</script>
+-->
+<!-- Finding array elements - the indexOf() and lastIndexOf() methods.
+	<script>
+		var colors = new Array("red", "blue", "green", "blue");
+		alert(colors.indexOf("red"));
+		alert(colors.lastIndexOf("blue"));
+	</script>
+-->
+<!-- Testing each element - the every(), some(), and filter() methods.
+	<script>
+		var numbers = new Array(1, 2, 3, 4, 5);
+		function isLessThan3(value, index, array) {
+			return value < 3;
+		}
+		alert(numbers.every(isLessThan3));
+	</script>
+	<script>
+		var numbers = new Array(1, 2, 3, 4, 5);
+		function isLessThan3(value, index, array) {
+			return value < 3;
+		}
+		alert(numbers.some(isLessThan3));
+	</script>
+	<script>
+		var numbers = new Array(1, 2, 3, 4, 5);
+		function isLessThan3(value, index, array) {
+			return value < 3;
+		}
+		if(numbers.some(isLessThan3)) {
+			var result = numbers.filter(isLessThan3);
+			alert("These numbers are less than 3: " + result);
+		}
+	</script>
+-->
+<!-- Operating on elements - the forEach() and map() methods.
+	<script>
+		var numbers = new Array(1, 2, 3, 4, 5);
+		function doubleAndAlert(value, index, array) {
+			var result = value * 2;
+			alert(result);
+		}
+		numbers.forEach(doubleAndAlert);
+	</script>
+	<script>
+		var numbers = new Array(1, 2, 3, 4, 5);
+		function doubleAndAlert(value, index, array) {
+			var result = value * 2;
+			return result;
+		}
+		var doubledNumbers = numbers.map(doubleAndAlert);
+		alert("The doubled numbers are: " + doubledNumbers);
+	</script>
+-->
+<!-- Math object's property - PI.
+	<script>
+		var radius = prompt("Give the radius of the circle", "");
+		var area = Math.PI * radius * radius;
+		document.write("The area is " + area);
+	</script>
+-->
+<!-- The abs() method.
+	<script>
+		var myNumber = -101;
+		document.write(Math.abs(myNumber));
+	</script>
+-->
+<!-- Finding the largest and smallest numbers: the min() and max() methods.
+	<script>
+		var arr = [1,2,23,4,5,6,7,83,23,4,234,3];
+		var min = Math.min(30.1, 30.2);
+		var max = Math.max(21, 22);
+		var arrMin = Math.min.apply(null, arr);
+		var arrMax = Math.max.apply(null, arr);
+		console.log(min, max, arrMin, arrMax);
+	</script>
+-->
+<!-- Rounding Numbers.
+	<script>
+		var myNumber = 101.01;
+		document.write(Math.ceil(myNumber) + "<br />");
+		document.write(parseInt(myNumber));
+	</script>
+-->
+<!-- The round() method.
+	<script>
+		var myNumber = -44.49;
+		document.write(Math.round(myNumber) + "<br />");
 	</script>
 -->
 </body>
