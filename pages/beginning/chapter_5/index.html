@@ -317,5 +317,228 @@
 		document.write(Math.round(myNumber) + "<br />");
 	</script>
 -->
+<!-- Rounding methods results calculator.
+	<script>
+		var myNumber = prompt("Enter the number to be rounded", " ");
+		document.write("<h3>The number you entered was " + myNumber + "</h3>");
+		document.write("<p>The rounding results for this number are</p>");
+		document.write("<table width='150' border='1'>");
+		document.write("<tr><th>Method</th><th>Result</th></tr>");
+		document.write("<tr><td>parseInt()</td><td>" + parseInt(myNumber) + "</td></tr>");
+		document.write("<tr><td>ceil()</td><td>" + Math.ceil(myNumber) + "</td></tr>");
+		document.write("<tr><td>floor()</td><td>" + Math.floor(myNumber) + "</td></tr>");
+		document.write("<tr><td>round()</td><td>" + Math.round(myNumber) + "</td></tr>");
+		document.write("</table>");
+	</script>
+-->
+<!-- The random() method.
+	<script>
+		var throwCount;
+		var diceThrow;
+		for(throwCount = 0; throwCount < 10; throwCount++) {
+			diceThrow = (Math.floor(Math.random() * 6) + 1);
+			document.write(diceThrow + "<br />");
+		}
+	</script>
+-->
+<!-- The pop() method.
+	<script>
+		function fix(fixNumber,decimalPlaces) {
+			var div = Math.pow(10, decimalPlaces);
+			fixNumber = Math.round(fixNumber * div) / div;
+			return fixNumber;
+		}
+		var number1 = prompt("Enter the number with decimal places you want to fix", "");
+		var number2 = prompt("How many decimal places do you want?", "");
+		document.write(number1 + " fixed to " + number2 + " decimal places is: ");
+		document.write(fix(number1, number2));
+	</script>
+-->
+<!-- Create a number object.
+	<script>
+		var firstNumber = new Number(123);
+		var secondNumber = new Number("123");
+		var thirdNumber = 123.765;
+		var fourthNumber = "123.567";
+		console.log(firstNumber);
+		console.log(secondNumber);
+		console.log(typeof thirdNumber);
+		console.log(typeof fourthNumber);
+	</script>
+-->
+<!-- The toFixed() method.
+	<script>
+		var itemCost = 9.99;
+		var itemCostAfterTax = itemCost * 1.075;
+		document.write("Item cost is $" + itemCostAfterTax + "<br />");
+		itemCostAfterTax = itemCostAfterTax.toFixed(2);
+		document.write("Item cost fixed to 2 decimal places is $" + itemCostAfterTax);
+	</script>
+-->
+<!-- Creating a date object.
+	<script>
+		var theDate1 = new Date();
+		var theDate2 = new Date(949278000000);
+		var theDate3 = new Date("31 January 2010");
+		var theDate4 = new Date(2010, 6, 31, 15, 35, 20, 20);
+		console.log(theDate1);
+		console.log(theDate2);
+		console.log(theDate3);
+		console.log(theDate4);
+	</script>
+-->
+<!-- Using the date object to retrieve the current date.
+	<script>
+		var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+		var dateNow = new Date();
+		var yearNow = dateNow.getFullYear();
+		var monthNow = months[dateNow.getMonth()];
+		var dayNow = dateNow.getDate();
+		var daySuffix;
+		switch(dayNow) {
+			case 1:
+			case 21:
+			case 31:
+				daySuffix = "st";
+				break;
+			case 2:
+			case 22:
+				daySuffix = "nd";
+				break;
+			case 3:
+			case 23:
+				daySuffix = "rd";
+				break;
+			default:
+				daySuffix = "th";
+				break;
+		}
+		document.write("It is the " + dayNow + daySuffix + " day");
+		document.write(" in the month of " + monthNow);
+		document.write(" in the year " + yearNow);
+	</script>
+-->
+<!-- Setting date values.
+	<script>
+		var nowDate = new Date();
+		var currentDay = nowDate.getDate();		
+		nowDate.setDate(currentDay + 28);
+		console.log(nowDate);
+		var newDate = new Date(nowDate);
+		newDate.setMonth(newDate.getMonth() + 12);
+		console.log(newDate);
+	</script>
+-->
+<!-- Writing the current time into a web page.
+	<div id="view"></div>
+	<script>
+		var greeting;
+		var nowDate = new Date();
+		var nowHour = nowDate.getHours();
+		var nowMintue = nowDate.getMinutes();
+		var nowSecond = nowDate.getSeconds();
+		if(nowMintue < 10) {
+			nowMintue = "0" + nowMintue;
+		}
+		if(nowSecond < 10) {
+			nowSecond = "0" + nowSecond;
+		}
+		if(nowHour < 12) {
+			greeting = "Good Morning";
+		} else if(nowHour < 17) {
+			greeting = "Good Afternoon";
+		} else {
+			greeting = "Good Evening";
+		}
+		function view() {
+			nowDate = new Date();
+			document.getElementById("view").innerHTML = "<h4>" + greeting + " and welcome to my website" + "</h4>";
+			document.getElementById("view").innerHTML += "According to your clock the time is ";
+			document.getElementById("view").innerHTML += nowDate.toTimeString().substr(0, 8);
+		}
+		var scroll = setInterval("view()", 1000);
+	</script>
+-->
+<!-- Setting time values.
+	<script>
+		var nowDate = new Date();
+		nowDate.setHours(9);
+		nowDate.setMinutes(57);
+		alert(nowDate);
+		nowDate.setMinutes(64);
+		alert(nowDate);
+	</script>
+-->
+<!-- Creating new types of objects(reference types).
+	<script>
+		function CustomerBooking(bookingId, customerName, film, showDate){
+			this.bookingId = bookingId;
+			this.customerName = customerName;
+			this.film = film;
+			this.showDate = showDate;
+		}
+		CustomerBooking.prototype.getBookingId = function(){
+			return this.bookingId;
+		}
+		CustomerBooking.prototype.setBookingId = function(bookingId){
+			this.bookingId = bookingId;
+		}
+		CustomerBooking.prototype.getCustomerName = function(){
+			return this.customerName;
+		}
+		CustomerBooking.prototype.setCustomerName = function(customerName){
+			this.customerName = customerName;
+		}
+		CustomerBooking.prototype.getFilm = function(){
+			return this.film;
+		}
+		CustomerBooking.prototype.setFilm = function(film){
+			this.film = film;
+		}
+		CustomerBooking.prototype.getShowDate = function(){
+			return this.showDate;
+		}
+		CustomerBooking.prototype.setShowDate = function(showDate){
+			this.showDate = showDate;
+		}
+		var firstBooking = new CustomerBooking(1234, "Robert Smith", "Raging Bull", "25 July 2004 18:20");
+		var secondBooking = new CustomerBooking(1244, "Arnold Palmer", "Toy Story", "27 July 2004 20:15");
+		document.write("1st booking persons name is " + firstBooking.getCustomerName() + "<br />");
+		document.write("2nd booking persons name is " + secondBooking.customerName) + "<br />";
+		// Cinema type
+		function Cinema(){
+			this.bookings = new Array();
+		}
+		Cinema.prototype.addBooking = function(bookingId, customerName, film, showDate){
+			this.bookings[bookingId] = new CustomerBooking(bookingId, customerName, film, showDate);
+		}
+		Cinema.prototype.getBookingsTable = function(){
+			var booking;
+			var bookingsTableHTML = "<table border='1'>";
+			bookingsTableHTML += "<tr>";
+			bookingsTableHTML += "<th>BookingId</th>";
+			bookingsTableHTML += "<th>CustomerName</th>";
+			bookingsTableHTML += "<th>Film</th>";
+			bookingsTableHTML += "<th>ShowDate</th>";
+			bookingsTableHTML += "</tr>";
+			for(booking in this.bookings) {
+				bookingsTableHTML += "<tr>";
+				bookingsTableHTML += "<td>" + this.bookings[booking].getBookingId() + "</td>";
+				bookingsTableHTML += "<td>" + this.bookings[booking].getCustomerName() + "</td>";
+				bookingsTableHTML += "<td>" + this.bookings[booking].getFilm() + "</td>";
+				bookingsTableHTML += "<td>" + this.bookings[booking].getShowDate() + "</td>";
+				bookingsTableHTML += "</tr>";
+			}
+			bookingsTableHTML += "</table>";
+			return bookingsTableHTML;
+		}
+		var londonOdeon = new Cinema();
+		londonOdeon.addBooking(342, "Arnold Palmer", "Toy Story", "15th July 2009 20:15");
+		londonOdeon.addBooking(335, "Louise Anderson", "The Shawshank Redemption", "27th July 2009 11:25");
+		londonOdeon.addBooking(566, "Catherine Hughes", "Never Say Never", "27th July 2009 17:55");
+		londonOdeon.addBooking(324, "Beci Smith", "Shrek", "29th July 2009 20:15");
+		document.write(londonOdeon.getBookingsTable());
+	</script>
+-->
 </body>
 </html>
