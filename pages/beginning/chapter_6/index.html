@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+</head>
+<body>
+<!--
+	Beginning JavaScript
+	Chapter Six
+	Programming the Browser
+-->
+<!-- The window object.
+	<script>
+		window.defaultStatus = "Hello and Welcome";
+	</script>
+	<script>
+		var defaultStatus;
+		defaultStatus = "Welcome to my website";
+	</script>
+	<script>
+		var myVariable = "Hello, World!";
+		alert(window.myVariable);
+	</script>
+-->
+<!-- Show window's content area size.
+	<span id="winsize"></span>
+	<script>
+		window.onresize = function() {
+			document.getElementById("winsize").innerHTML = "width: " + 
+			(window.innerWidth || document.documentElement.clientWidth) + "px, height: " + 
+			(window.innerHeight || document.documentElement.clientHeight) + "px.";
+		}
+	</script>
+-->
+<!-- Checking a window has been closed or not.
+	<h1 id="msg"></h1>
+	<input type="button" onclick="openWin()" value="Open myWindow" />
+	<input type="button" onclick="checkWin()" value="Has myWindow been closed?" />
+	<script>
+		var myWindow;
+		function openWin(){
+			if(!myWindow || myWindow.closed){
+				myWindow = window.open("", "", "width=400,height=200");
+				myWindow.document.write("<h2>This is myWindow!</h2>");
+				myWindow.focus();
+				myWindow.opener.checkWin();
+				myWindow.onbeforeunload = function(){
+					this.opener.document.getElementById("msg").innerHTML = "&ldquo;myWindow&rdquo; has been closed!";
+				} 
+			}else{
+				alert("myWindow has not been closed!");
+			}
+		}
+		function checkWin(){
+			if(!myWindow){
+				document.getElementById("msg").innerHTML = "&ldquo;myWindow&rdquo; has never been opened!";
+			}else if(myWindow.closed){
+				document.getElementById("msg").innerHTML = "&ldquo;myWindow&rdquo; has been closed!";
+			}else{
+				document.getElementById("msg").innerHTML = "&ldquo;myWindow&rdquo; has not been closed!";
+			}
+		}
+		checkWin();
+	</script>
+-->
+<!-- the history object.
+	<input type="button" value="history.back()" onclick="javascript:history.back()" />
+	<input type="button" value="history.forward()" onclick="javascript:history.forward()" />
+	<input type="button" value="history.go(-2)" onclick="javascript:history.go(-2)" />
+	<script>
+		document.write("<br />history.length: " + history.length);
+	</script>
+-->
+<!-- the location object.
+	<input type="button" value="location.href" onclick="javascript:location.href = 'http://www.baidu.com';" />
+	<input type="button" value="location.replace()" onclick="javascript:location.replace('http://www.baidu.com');" />
+	<input type="button" value="location.reload()" onclick="javascript:location.replace();" />
+	<input type="button" value="location.assign()" onclick="javascript:location.assign('http://www.baidu.com');" />
+	<script>
+		document.write("<br />location.hash: " + location.hash + "<br />");
+		document.write("location.host: " + location.host + "<br />");
+		document.write("location.hostname: " + location.hostname + "<br />");
+		document.write("location.href: " + location.href + "<br />");
+		document.write("location.pathname: " + location.pathname + "<br />");
+		document.write("location.port: " + location.port + "<br />");
+		document.write("location.protocol: " + location.protocol + "<br />");
+		document.write("<strong>location.search: " + location.search + "</strong>");
+	</script>
+-->
+<!-- the navigator object.
+	<script>
+		document.write("Browser CodeName: " + navigator.appCodeName + "<br />");
+		document.write("Browser Name: " + navigator.appname + "<br />");
+		document.write("Browser Version: " + navigator.appVersion + "<br />");
+		document.write("Cookies Enabled: " + navigator.cookieEnabled + "<br />");
+		document.write("Platform: " + navigator.platform + "<br />");
+		document.write("User-agent header: " + navigator.userAgent + "<br />");
+		document.write("User-agent language: " + navigator.systemLanguage);
+	</script>
+-->
+<!-- the screen object.
+	<script>
+		document.write("Screen Available Width: " + screen.availWidth + "px<br />");
+		document.write("Screen Available Height: " + screen.availHeight + "px<br />");
+		document.write("Screen Width: " + screen.width + "px<br />");
+		document.write("Screen Height: " + screen.height + "px<br />");
+		document.write("Color Depth: " + screen.colorDepth + "bit<br />");
+	</script>
+-->
+<!-- Setting colors according to the user's screen color depth.
+	<script>
+		switch(window.screen.colorDepth){
+			case 1:
+			case 4:
+				document.bgColor = "white";
+				break;
+			case 8:
+			case 15:
+			case 16:
+				document.bgColor = "blue";
+				break;
+			case 24:
+			case 32:
+				document.bgColor = "skyblue";
+				break;
+			default:
+				document.bgColor = "white";
+				break;
+		}
+		document.write("Your screen supports " + window.screen.colorDepth + " bit color");
+	</script>
+-->
+<!-- Image selection
+	<img name="img1" src="" border="0" width="384" height="203" />
+	<script>
+		var myImages = new Array("3169864.gif", "3169022.gif", "3169141.gif", "3169510.gif");
+		var imgIndex = prompt("Enter a number from 0 to 3", "");
+		document.images["img1"].src = "http://photo9.zj.com/wdrpat/165857/" + myImages[imgIndex];
+	</script>
+-->
+<!-- Handlling events via HTML attributes.
+	<script>
+		function linkSomePage_onclick(){
+			return confirm("You Clicked?");
+		}
+	</script>
+	<a href="http://www.baidu.com" name="linkSomePage" onclick="return linkSomePage_onclick()">Click Me</a>
+-->
+<!-- Handlling events via object properties.
+	<a href="http://www.baidu.com" name="linkSomePage">Click Me</a>
+	<script>
+		function linkSomePage_onclick(){
+			return confirm("You Clicked?");
+		}
+		window.document.links["linkSomePage"].onclick = linkSomePage_onclick;
+	</script>
+-->
+<!-- Displaying a random image when the page loads.
+	<style type="text/css">
+		img{border:0;width:384px;height:203px;cursor:pointer;}
+	</style>
+	<script>
+		var myImages = new Array("3169864.gif", "3169022.gif", "3169141.gif", "3169510.gif");
+		function changeImg(that){
+			var newImgNumber;
+			do{
+				newImgNumber = Math.floor(Math.random() * 4)
+			}while(-1 != that.src.indexOf(myImages[newImgNumber]));
+			that.src = "http://photo9.zj.com/wdrpat/165857/" + myImages[newImgNumber];
+			return false;
+		}
+	</script>
+	<img name="img0" src="http://photo9.zj.com/wdrpat/165857/3169864.gif" onclick="return changeImg(this)" />
+	<img name="img1" src="http://photo9.zj.com/wdrpat/165857/3169022.gif" onclick="return changeImg(this)" />
+-->
+<!-- Checking for supported browser properties.
+	<script>
+		var browser = "Unknown";
+		var version = "0";
+		if(window.opera){
+			browser = "Opera";
+			version = "5+";
+			if(window.opera.setPreference){
+				version = "9";
+			}
+		}else if(document.all){
+			browser = "Internet Explorer";
+			version = "6+";
+			if(window.XMLHttpRequest){
+				version = "7+";
+			}
+		}else if(window.sidebar){
+			browser = "Firefox";
+			version = "1+";
+		}
+		document.write(browser + " " + version);
+	</script>
+-->
+<!-- No script at all.
+	<noscript>
+		This website requires JavaScript to be enabled.
+	</noscript>
+-->
+<!-- Checking for and Dealing with Different Browsers.
+	<script>
+		function getBrowserName(){
+			var lsBrowser = navigator.userAgent;
+			if(-1 != lsBrowser.indexOf("MSIE")){
+				lsBrowser = "MSIE";
+			}else if(-1 != lsBrowser.indexOf("Firefox")){
+				lsBrowser = "Firefox";
+			}else if(-1 != lsBrowser.indexOf("Chrome")){
+				lsBrowser = "Chrome";
+			}else if(-1 != lsBrowser.indexOf("Safari")){
+				lsBrowser = "Safari";
+			}else if(-1 != lsBrowser.indexOf("Opera")){
+				lsBrowser = "Opera";
+			}else{
+				lsBrowser = "Unknown";
+			}
+			return lsBrowser;
+		}
+		function getBrowserVersion(){
+			var findIndex;
+			var browserVersion = 0;
+			var browser = getBrowserName();
+			browserVersion = navigator.userAgent;
+			findIndex = browserVersion.indexOf(browser) + browser.length + 1;
+			browserVersion = parseFloat(browserVersion.substr(findIndex, 3));
+			return browserVersion;	
+		}
+		var browserName = getBrowserName();
+		var browserVersion = getBrowserVersion();
+		if(browserName == "MSIE"){
+			if(browserVersion < 7){
+				document.write("Your version of Internet Explorer is too old");
+			}else{
+				document.write("Your version of Internet Explorer is fully supported");
+			}
+		}else if(browserName == "Firefox"){
+			document.write("Firefox is fully supported");
+		}else if(browserName == "Safari"){
+			document.write("Safari is fully supported");
+		}else if(browserName == "Chrome"){
+			document.write("Chrome is fully supported");
+		}else if(browserName == "Opera"){
+			document.write("Opera is fully supported");
+		}else{
+			document.write("<h2>Sorry this browser version is not supported</h2>");
+		}
+	</script>
+	<noscript>
+		<h2>This website requires a browser supporting scripting</h2>
+	</noscript>
+-->
+<!-- Exercise one.
+	<a title="Google" href="http://www.google.com/">Google</a>
+	<a title="Baidu" href="http://www.baidu.com/">Baidu</a>
+	<a title="Netease" href="http://www.163.com/">Netease</a>
+	<a title="Xoyo" href="http://www.xoyo.com/">Xoyo</a>
+	<a title="Highcharts" href="http://www.highcharts.com/">Highcharts</a>
+	<a title="Tencent" href="http://www.qq.com/">Tencent</a>
+	<script>
+		window.onload = function(){
+			for(var i = 0; i < document.links.length; i++){
+				document.links[i].innerHTML = "<h1>" + document.links[i].innerHTML + "</h1><p>" + document.links[i].href + "</p>";
+			}
+		};
+	</script>
+-->
+<!-- Exercise two.
+	<script>
+		if(document.all){
+			document.write("<h1>Welcome to the Internet Explorer only page.</h1>");
+		}else{
+			document.write("<h1>Welcome to the NoIE only page.</h1>");
+		}
+	</script>
+-->
+<!-- Exercise three.
+	<style type="text/css">
+		img{border:0;width:384px;height:203px;cursor:pointer;}
+	</style>
+	<script>
+		var preSrc = "http://photo9.zj.com/wdrpat/165857/"
+		var myImages = new Array("3169864.gif", "3169022.gif", "3169141.gif", "3169510.gif");
+		var cur = 1;
+		document.write("<img name='myImg' src='" + preSrc + myImages[0] + "' />");
+		document.images["myImg"].onmouseover = function(){
+			this.src = preSrc + myImages[cur];
+		};
+		document.images["myImg"].onmouseout = function(){
+			this.src = preSrc + myImages[0];
+			cur = cur >= myImages.length - 1 ? 1 : cur + 1;
+
+		};
+	</script>
+-->
+</body>
+</html>	
