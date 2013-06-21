@@ -30,5 +30,109 @@
 		};
 	</script>
 -->
+<!-- Counting Button clicks.
+	<form name="myForm" action="">
+		<input type="button" name="myButton" value="Button clicked 0 times" onclick="myButton_onclick(this)" />
+	</form>
+	<script>
+		var numberOfClicks = 0;
+		function myButton_onclick(that){
+			numberOfClicks++;
+			that.value = "Button clicked " + numberOfClicks + " times";
+		}
+	</script>
+-->
+<!-- onmouseup and onmousedown.
+	<form name="myForm" action="">
+		<input type="button" name="myButton" value="Mouse Goes Up" onmouseup="myButton_onmouseup(this)" onmousedown="myButton_onmousedown(this)" />
+	</form>
+	<script>
+		function myButton_onmouseup(that){
+			that.value = "Mouse Goes Up";
+		}
+		function myButton_onmousedown(that){
+			that.value = "Mouse Goes down";
+		}
+	</script>
+-->
+<!-- The text box.
+	<input type="text" name="myTextBox" size="10" maxlength="15" value="Hello World" />
+	<input type="text" namy="txtReadonly" value="Look but don't change" onfocus="this.blur()" readonly="readonly"> 
+-->
+<!-- A simple form with validation.
+	<form name="myForm" action="">
+		Please enter the following details:
+		<p>
+			<label>Name:</label>
+			<br />
+			<input type="text" name="txtName" onchange="txtName_onchange()" />
+		</p>
+		<p>
+			<label>Age:</label>
+			<br />
+			<input type="text" name="txtAge" size="3" maxlength="3" />
+		</p>
+		<p>
+			<input type="button" value="Check Details" name="btnCheckForm" onclick="btnCheckForm_onclick()" />
+		</p>
+	</form>
+	<script>
+		function btnCheckForm_onclick(){
+			var myForm = document.myForm;
+			myForm.txtAge.value = myForm.txtAge.value.trim();
+			myForm.txtName.value = myForm.txtName.value.trim();
+			if(!txtAge_onblur()){
+				return false;
+			}		
+			if(myForm.txtAge.value == "" || myForm.txtName.value == ""){
+				alert("Please complete all the form");
+				if(myForm.txtName.value == ""){
+					myForm.txtName.focus();
+				}else{
+					myForm.txtAge.focus();
+				}
+			}else{
+				alert("Thanks for completing the form " + myForm.txtName.value);
+			}
+		}
+		function txtName_onchange(){
+			window.status = "Hi! " + document.myForm.txtName.value;
+		}
+		function txtAge_onblur(){
+			var txtAge = document.myForm.txtAge;
+			if(isNaN(txtAge.value) == true){
+				alert("Please enter a valid age");
+				txtAge.focus();
+				txtAge.select();
+				return false;
+			}
+			return true;
+		}
+	</script>
+-->
+<!-- the textarea element.
+	<textarea name="myTextArea" cols="40" rows="20">
+		Hello World
+		Line 2
+	</textarea>
+-->
+<!-- Event watching.
+	<form action="" name="form1">
+		<textarea name="textarea1" rows="15" cols="40" onchange="displayEvent('onchange\n');" onkeydown="displayEvent('onkeydown\n')" onkeyup="displayEvent('onkeyup\n\n')" onkeypress="displayEvent('onkeypress\n');"></textarea>
+		<textarea name="textarea2" rows="15" cols="40"></textarea>
+		<br />
+		<br />
+		<input type="button" value="Clear Event TextArea" name="Clean" onclick="document.form1.textarea2.value=''" />
+	</form>
+	<script>
+		function displayEvent(eventName){
+			var myMessage = document.form1.textarea2.value;
+			myMessage += eventName;
+			document.form1.textarea2.value = myMessage;
+		}
+	</script>
+-->
+<input type="checkbox" name="chkDVD" checked="checked" value="DVD" />
+<input type="checkbox" name="radCPUSpeed" checked="checked" value="1 GHz" />
 </body>
 </html>
