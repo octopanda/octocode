@@ -132,7 +132,238 @@
 		}
 	</script>
 -->
-<input type="checkbox" name="chkDVD" checked="checked" value="DVD" />
-<input type="checkbox" name="radCPUSpeed" checked="checked" value="1 GHz" />
+<!-- Create checkbox.
+	<input type="checkbox" name="chkDVD" checked="checked" value="DVD" />
+	<input type="checkbox" name="radCPUSpeed" checked="checked" value="1 GHz" />
+-->
+<!-- Create radio.
+	<input type="radio" name="radCPUSpeed" checked="checked" value="800 MHz" />
+	<input type="radio" name="radCPUSpeed" value="1 GHz" />
+	<input type="radio" name="radCPUSpeed" value="1.5 GHz" />
+-->
+<!-- Check boxes and radio buttons.
+	<form action="" name="form1">
+		<p>Tick all of the components you want included on your computer</p>
+		<table>
+			<tr>
+				<td>DVD-ROM</td>
+				<td><input type="checkbox" name="chkDVD" value="DVD-ROM" /></td>
+			</tr>
+			<tr>
+				<td>CD-ROM</td>
+				<td><input type="checkbox" name="chkCD" value="CD-ROM" /></td>
+			</tr>
+			<tr>
+				<td>Zip Drive</td>
+				<td><input type="checkbox" name="chkZip" value="ZIP Drive" /></td>
+			</tr>
+		</table>
+		<p>Select the processor speed you require</p>
+		<table>
+			<tr>
+				<td><input type="radio" name="radCPUSpeed" checked="checked" value="3.8 GHz" onclick="return radCPUSpeed_onclick(0)" /></td>
+				<td>3.8 GHz</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="radCPUSpeed" checked="checked" value="4.8 GHz" onclick="return radCPUSpeed_onclick(1)" /></td>
+				<td>4.8 GHz</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="radCPUSpeed" checked="checked" value="6 GHz" onclick="return radCPUSpeed_onclick(2)" /></td>
+				<td>6 GHz</td>
+			</tr>
+		</table>
+		<input type="button" value="Check Form" name="btnCheck" onclick="return btnCheck_onclick()" />
+	</form>
+	<script>
+		var radCpuSpeedIndex = 0;
+		function radCPUSpeed_onclick(radIndex){
+			var returnValue = true;
+			if(radIndex == 1){
+				returnValue = false;
+				alert("Sorry that processor speed is currently unavailable");
+				// Next line works around a bug in IE that doesn't cancel the default action properly.
+				document.form1.radCPUSpeed[radCpuSpeedIndex].checked = true;
+			}else{
+				radCpuSpeedIndex = radIndex;
+			};
+			return returnValue;
+		}
+		function btnCheck_onclick(){
+			var element;
+			var compSpec = "Your chosen processor speed is ";
+			compSpec = compSpec + document.form1.radCPUSpeed[radCpuSpeedIndex].value;
+			compSpec = compSpec + "\nWith the following additional components\n";
+			for (var i = 0; i < document.form1.length; i++) {
+				element = document.form1[i];
+				if(element.type == "checkbox"){
+					if(element.checked == true){
+						compSpec = compSpec + element.value + "\n";
+					}
+				}
+			};
+			alert(compSpec);
+		}
+	</script>
+-->
+<!-- Selection boxes.
+	<form name="form1" action="">
+		<select name="theDay" multiple="true" size="5">
+			<option value="0" selected="selected">Monday</option>
+			<option value="1">Tuesday</option>
+			<option value="2">Wednesday</option>
+			<option value="3">Thursday</option>
+			<option value="4">Friday</option>
+			<option value="5">Saturday</option>
+			<option value="6">Sunday</option>
+		</select>
+	</form>
+	<script>
+		var theDayElement = window.document.form1.theDay;
+		var myNewOption = new Option("TheText", "TheValue");
+		theDayElement[theDayElement.length] = myNewOption;
+		document.write("There are " +  theDayElement.length + " options<br />");
+		for (var i = 0; i < theDayElement.length; i++) {
+			document.write("Option text is " + theDayElement.options[i].text);
+			document.write(" and its value is ");
+			document.write(theDayElement.options[i].value);
+			document.write("<br />");
+		};
+	</script>
+-->
+<!-- Adding and removing list options.
+	<form action="" name="form1">
+		<select name="theDay" size="5">
+			<option value="0">Monday</option>
+			<option value="1">Tuesday</option>
+			<option value="2">Wednesday</option>
+			<option value="3">Thursday</option>
+			<option value="4">Friday</option>
+			<option value="5">Saturday</option>
+			<option value="6">Sunday</option>
+		</select>
+		<p>THE DELETED DAYS</p>
+		<select name="theDeleted" size="5"></select>
+		<br />
+		<input type="button" value="Remove Wednesday" name="btnRemoveWed" onclick="btnRemoveWed_onclick()" />
+		<input type="button" value="Add Wednesday" name="btnAddWed" onclick="btnAddWed_onclick()" />
+		<br />
+		<input type="button" value="Remove" name="btnRemove" onclick="btnRemove_onclick()" />
+		<input type="button" value="Add" name="btnAdd" onclick="btnAdd_onclick()" />
+	</form>
+	<script>
+		function btnRemoveWed_onclick(){
+			var days = document.form1.theDay;
+			if(days[2].text == "Wednesday"){
+				days.remove(2);
+			}else{
+				alert("There is no Wednesday here!");
+			}
+		}
+		function btnAddWed_onclick(){
+			var days = document.form1.theDay;
+			if(days[2].text != "Wednesday"){
+				var option = new Option("Wednesday", 2);
+				try{
+					days.add(option, days[2]);
+				}catch(exp){
+					days.add(option, 2);
+				}
+			}else{
+				alert("Do you want to have TWO Wednesdays?");
+			}
+		}
+		function btnRemove_onclick(){
+			var days = document.form1.theDay;
+			var deleteds = document.form1.theDeleted;
+			if(days.selectedIndex >= 0){
+				var option = new Option(days[days.selectedIndex].text, days[days.selectedIndex].value);
+				try{
+					deleteds.add(option, null);
+				}catch(ex){
+					deleteds.add(option);
+				}
+				days.remove(days.selectedIndex);
+			}else{
+				alert("Please select one day");
+			}
+			days.focus();
+			days.selectedIndex = 0;
+		}
+		function btnAdd_onclick(){
+			var days = document.form1.theDay;
+			var deleteds = document.form1.theDeleted;
+			if(deleteds.selectedIndex >= 0){
+				if(days.length > 0){
+					days[days.length] = new Option();
+					var index = days.length - 1;
+					for(index; (index > 0) && (days[index - 1].value > deleteds[deleteds.selectedIndex].value); index--){
+						days[index].text = days[index - 1].text;
+						days[index].value = days[index - 1].value;
+					}
+					days[index] = deleteds[deleteds.selectedIndex];
+					deleteds[deleteds.selectedIndex] = null;
+				}else{
+					days[days.length] = deleteds[deleteds.selectedIndex];
+				}
+			}else{
+				alert("Please select one day in deleted days");
+			}
+			deleteds.focus();
+			deleteds.selectedIndex = 0;
+		}
+	</script>
+-->
+<script>
+	function writeOptions(startNumber, endNumber){
+		for(var i = startNumber; i <= endNumber; i++){
+			document.write("<option value=" + i + ">" + i + "</option>");
+		}
+	}
+	function writeMonthOptions(){
+		var theMonth;
+		var theDate = new Date(1);
+		for(var i = 0; i < 12; i++){
+			theDate.setMonth(i);
+			theMonth = theDate.toString();
+			theMonth = theMonth.substr(4, 3);
+			document.write("<option value=" + theMonth + ">" + theMonth);
+		}
+	}
+	function recalcDateDiff(){
+		var myForm = document.form1;
+		var firstDay = myForm.firstDay.options[myForm.firstDay.selectedIndex].value;
+		var secondDay = myForm.secondDay.options[myForm.secondDay.selectedIndex].value;
+		var firstMonth = myForm.firstMonth.options[myForm.firstMonth.selectedIndex].value;
+		var secondMonth = myForm.secondMonth.options[myForm.secondMonth.selectedIndex].value;
+		var firstYear = myForm.firstYear.options[myForm.firstYear.selectedIndex].value;
+		var secondYear = myForm.secondYear.options[myForm.secondYear.selectedIndex].value;
+		var firstDate = new Date(firstDay + " " + firstMonth + " " + firstYear);
+		var secondDate = new Date(secondDay + " " + secondMonth + " " + secondYear);
+		var daysDiff = (secondDate.valueOf() - firstDate.valueOf());
+		daysDiff = Math.floor(Math.abs((daysDiff / 1000 / 3600 / 24)));
+		myForm.txtDays.value = daysDiff;
+	}
+	function window_onload(){
+		var theForm = document.form1;
+		var nowDate = new Date();
+		theForm.firstDate.options[nowDate.getDate() - 1].selected = true;
+		theForm.secondDate.options[nowDate.getDate() - 1].selected = true;
+		theForm.firstMonth.options[nowDate.getMonth()].selected = true;
+		theForm.secondMonth.options[nowDate.getMonth()].selected = true;
+		theForm.firstYear.options[nowDate.getFullYear() - 1970].selected = true;
+		theForm.secondYear.options[nowDate.getFullYear() - 1970].selected = true;
+	}
+</script>
+<form action="" name="form1">
+	<p>
+		First Date<br />
+		<select name="firstDay" onchange="recaclDateDiff()">
+			<script>
+				writeOptions(1, 31);
+			</script>
+		</select>
+	</p>
+</form>
 </body>
 </html>
