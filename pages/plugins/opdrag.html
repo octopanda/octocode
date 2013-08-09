@@ -77,7 +77,7 @@
 						"z-index": 9999
 					});
 					var cpos = [];
-					area.$em.find(".item").not(area.$em.$item).each(function(i, e){
+					area.$em.find(opts.item).not(area.$em.$item).each(function(i, e){
 						cpos.push(area.getPos(this));
 					});
 					area.cpos = cpos;
