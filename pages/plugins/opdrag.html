@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>OPDRAG</title>
-	<script src="../js/jquery.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<style type="text/css">
 		*{margin:0;border:0;padding:0;color:#333;font:normal 12px/14px "microsoft yahei" arial simsun;}
 		.area{margin:0 auto;width:960px;overflow:hidden;zoom:1;background-color:khaki;}
@@ -68,14 +68,12 @@
 					area.mouseY = e.pageY - itemposY;
 				},
 				pickup: function(e){
-					var $target = $(e.target);
-					var $item = $target.closest(opts.item);
 					area.$em.$item.unbind("mousemove");
 					area.$em.$copyitem = area.$em.$item.clone(true);
 					area.$em.$copyitem.attr("copyed", "true").css({"opacity": 0.4});
 					area.$em.$item.after(area.$em.$copyitem);
 					area.$em.find(area.$em.$item).detach().appendTo(area.$em);
-					$item.css({
+					area.$em.$item.css({
 						"position": "absolute",
 						"z-index": 9999
 					});
