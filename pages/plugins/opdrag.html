@@ -55,6 +55,7 @@
 					this.$em.find(opts.drags).mousedown(this.select);
 				},
 				select: function(e){
+					e.preventDefault();
 					area = areae[idx];
 					var $target = $(e.target);
 					area.$em.$item = $target.closest(opts.item);
