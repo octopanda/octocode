@@ -41,7 +41,6 @@
 	</div>
 </div>
 <script>
-// console.log("e.pageX:" + e.pageX + ", e.pageY:" + e.pageY + ", $item.offsetLeft:" + $item.offset().left + ", $item.offsetTop:" + $item.offset().top + ".");
 ;(function($, window, document, undefined){
 	$.fn.opdrag = function(options){
 		var opts = $.extend({}, $.fn.opdrag.options, options);
@@ -70,7 +69,7 @@
 				pickup: function(e){
 					area.$em.$item.unbind("mousemove");
 					area.$em.$copyitem = area.$em.$item.clone(true);
-					area.$em.$copyitem.attr("copyed", "true").css({"opacity": 0.4});
+					area.$em.$copyitem.css({"opacity": 0.4});
 					area.$em.$item.after(area.$em.$copyitem);
 					area.$em.find(area.$em.$item).detach().appendTo(area.$em);
 					area.$em.$item.css({
