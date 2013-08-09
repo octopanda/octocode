@@ -96,7 +96,7 @@
 						for(var i = 0; i < area.cpos.length; i++){
 							if(i != area.$em.$copyitem.index() && e.pageY >= area.cpos[i].top && e.pageY <= area.cpos[i].bottom){
 								var $copy = area.$em.$copyitem.detach();
-								area.$em.find(".item").eq(i).before($copy);
+								area.$em.find(opts.item).eq(i).before($copy);
 								break;
 							}
 						}
@@ -130,7 +130,7 @@
 		});
 	};
 	$.fn.opdrag.options = {
-		item: "",
+		item: ".item",
 		drags: ".hd"
 	};
 })(jQuery, window, document);
