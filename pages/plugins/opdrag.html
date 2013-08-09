@@ -67,6 +67,7 @@
 					area.mouseY = e.pageY - itemposY;
 				},
 				pickup: function(e){
+					e.preventDefault();
 					area.$em.$item.unbind("mousemove");
 					area.$em.$copyitem = area.$em.$item.clone(true);
 					area.$em.$copyitem.css({"opacity": 0.4});
@@ -85,6 +86,7 @@
 					$(document).bind("mouseup", area.dropdown);
 				},
 				move: function(e){
+					e.preventDefault();
 					area.$em.$item.css({
 						"left": e.pageX - area.mouseX,
 						"top": e.pageY - area.mouseY
