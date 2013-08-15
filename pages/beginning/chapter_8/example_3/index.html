@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>index</title>
+	<script>
+		var detailsWindow;
+		function showDetails(bookURL){
+			detailsWindow = window.open(bookURL, "bookDetails", "width=600, height=800");
+			detailsWindow.focus();
+		}
+	</script>
+</head>
+<body>
+	<h2>Online Book Buyer</h2>
+	<p>Click any of the images below for more details.</p>
+	<h4>Professional Ajax</h4>
+	<p>
+		<a href="pro_ajax_details.html" onclick="showDetails('pro_ajax_details.html'); return false;">
+			<img alt="Professional Ajax, 2nd Edition" border="0" src="http://media.wiley.com/product_data/coverImage/91/04701094/0470109491.jpg" />
+		</a>
+	</p>
+	<h4>Professional JavaScript for Web Developers</h4>
+	<p>
+		<a href="pro_js_details.html" onclick="showDetails('pro_js_details.html'); return false;">
+			<img alt="Professional JavaScript, 2nd Edition" border="0" src="http://media.wiley.com/product_data/coverImage/88/07645790/0764579088.jpg" />
+		</a>
+	</p>
+</body>
+</html>
