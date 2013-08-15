@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>index</title>
+	<script>
+		var pagesVisited = new Array();
+		function returnPagesVisited(){
+			var returnValue = "So far you have visited the following pages\n";
+			var numberOfPagesVisited = pagesVisited.length;
+			for(var i = 0; i < pagesVisited.length; i++){
+				returnValue += pagesVisited[i] + "\n";
+			}
+			return returnValue;
+		}
+		function addPage(fileName){
+			fileName = fileName.substr(fileName.lastIndexOf("/") + 1);
+			pagesVisited.push(fileName);
+			return true;
+		}
+	</script>
+</head>
+<frameset cols="200, *">
+	<frame name="frameMenu" src="menu.html" />
+	<frame name="frameMain" src="main.html" />
+</frameset>
+</html>

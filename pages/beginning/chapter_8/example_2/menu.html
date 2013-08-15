@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>menu</title>
+	<script>
+		function choosePage_onchange(){
+			var choosePage = document.form1.choosePage;
+			var windowobject;
+			if(document.form1.radFrame[0].checked == true){
+				windowobject = window.parent.frameMain.frameTop;
+			}else{
+				windowobject = window.parent.frameMain.frameBottom;
+			}
+			windowobject.location.href = choosePage[choosePage.selectedIndex].value;
+			return true;
+		}
+	</script>
+</head>
+<body>
+	<form name="form1" action="">
+		Select frame
+		<br />
+		TOP<input name="radFrame" checked="checked" type="radio" />
+		Bottom<input name="radFrame" type="radio" />
+		<br />
+		<br />
+		<select name="choosePage" onchange="choosePage_onchange()">
+			<option value="a.html">Page A</option>
+			<option value="b.html">Page B</option>
+			<option value="c.html">Page C</option>
+			<option value="d.html">Page D</option>
+		</select>
+	</form>
+</body>
+</html>

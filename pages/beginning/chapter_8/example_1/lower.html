@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>lower frame</title>
+	<style type="text/css">
+		body {background:lightgreen;}
+	</style>
+	<script>
+		function window_onload(){
+			alert("The name of the lower frame's window object is " + window.name);
+			alert("The location of lowerWindow's parent is " + window.parent.location.href);
+		}
+	</script>
+</head>
+<body onload="window_onload()">
+	<p>Lower Frame</p>
+</body>
+</html>
