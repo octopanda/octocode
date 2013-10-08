@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>Regular Expressions Tester</title>
+	<script>
+		function getModifiers(){
+			var modifiers = "";
+			var chkModify = document.formRegExp.chkModify;
+			for(var i = 0; i < chkModify.length; i++){
+				if(chkModify[i].checked){
+					modifiers += chkModify[i].value;
+				}
+			}
+			return modifiers;
+		}
+		function doTest(pattern, str, modifiers){
+			console.log(str);
+			var txtResult = document.formRegExp.txtResult;
+			if(pattern && str){
+				var regexp = new RegExp(pattern, modifiers);
+				console.log(regexp);
+				txtResult.value = regexp.test(str) ? "Match Found!" : "Match NOT Found!";
+			}else{
+				txtResult.value = "Please enter the Regular Expression and Test String.";
+			}
+		}
+		function findMatches(pattern, str, modifiers){
+			console.log(str);
+			var txtResult = document.formRegExp.txtResult;
+			if(pattern && str){
+				var regexp = new RegExp(pattern, modifiers);
+				var matches = [];
+				console.log(regexp);
+				matches = str.match(regexp);
+				txtResult.value = matches ? matches.join("\n") : "Match NOT Found!";
+				console.log(matches);
+			}else{
+				txtResult.value = "Please enter the Regular Expression and Test String.";
+			}
+		}
+	</script>
+</head>
+<body>
+<form id="formRegExp" name="formRegExp" method="post" action="">
+	<p>
+		<label for="txtRegExp"><strong>Regular Expression: </strong></label>
+		<input id="txtRegExp" name="txtRegExp" type="text" size="100" value="" />
+	</p>
+	<p>
+		<strong>Modifiers: </strong>
+		<br />
+		<input id="chkModifyG" name="chkModify" type="checkbox" checked="checked" value="g" />
+		<label for="chkModifyG">Global</label>
+		<br />
+		<input id="chkModifyI" name="chkModify" type="checkbox" checked="checked" value="i" />
+		<label for="chkModifyI">Case Insensitive</label>
+		<br />
+		<input id="chkModifyM" name="chkModify" type="checkbox" checked="checked" value="m" />
+		<label for="chkModifyM">Multi Line</label>
+	</p>
+	<p>
+		<label for="txtString"><strong>Test Text: </strong></label>
+		<br />
+		<textarea id="txtString" name="txtString" cols="100" rows="8"></textarea>
+	</p>
+	<p>
+		<label for="txtResult"><strong>Result: </strong></label>
+		<br />
+		<textarea id="txtResult" name="txtResult" cols="100" rows="8"></textarea>
+		<br />
+		<input id="btnTest" name="btnTest" type="button" value="TEST" onclick="doTest(document.formRegExp.txtRegExp.value, document.formRegExp.txtString.value, getModifiers())" />
+		<input id="btnMatch" name="btnMatch" type="button" value="MATCH" onclick="findMatches(document.formRegExp.txtRegExp.value, document.formRegExp.txtString.value, getModifiers())" />
+		<input id="btnReset" name="btnReset" type="reset" value="RESET" />
+	</p>
+</form>
+</body>
+</html>
