@@ -50,7 +50,7 @@
 	<script>
 		var myString = "1997, 1998, 1999, 2000, 2000, 2001, 2002";
 		myMatchArray = myString.match("2000");
-		console.log(myMatchArray.index);
+		console.log(myMatchArray);
 	</script>
 -->
 <!-- Simple Regular Expressions.
@@ -83,6 +83,171 @@
 		<br />
 		<input name="btnValid" type="button" value="Check Character Validity" onclick="valid(document.formRegExp.txtPhrase.value)" />
 	</form>
+-->
+<!-- Position Characters.
+	<script>
+		var myString = "Hello world!, let's look at boundaries said 007.";
+		// var myRegExp = /\b/g;
+		var myRegExp = /\B/g;
+		myString = myString.replace(myRegExp, "|");
+		console.log(myString);
+	</script>
+-->
+<!-- Covering All Eventualities.
+	<script>
+		var myString = "Paul, Paula, Pauline, paul, Paul";
+		var myRegExp = /\bPaul\b/gi;	
+		// var myRegExp = /\b\w*Paul\w*\b/gi;
+		myString = myString.replace(myRegExp, "Ringo");
+		console.log(myString);
+	</script>
+-->
+<!-- Grouping Regular Expressions.
+	<script>
+		var myString = "JavaScript, VBScript and Perl";
+		var myRegExp = /\b(Java|VB)Script\b/gi;
+		var myMatchArray = myString.match(myRegExp);
+		console.log(myMatchArray);
+	</script>
+-->
+<!-- Reusing Groups of Characters.
+	<script>
+		var myString = "007,007,   002002,002, 002, 003,002,007,   004, 006,003";
+		var myRegExp = /(\b\d+),(?=[^\1]*\1)|\s/gi;
+		var uniqString = myString.replace(myRegExp, "");
+		console.log(uniqString);
+	</script>
+-->
+<!-- The split() Method with Regular Expressions.
+	<script>
+		var myListString = "apple, 0.99, banana, 30,peach,0.25, orange, 0.75";
+		// var myListString = "apple, banana, peach, orange";
+		// var myFruitArray = myListString.split(/,\s?\d+\.?\d+,?\s?/);
+		var myFruitArray = myListString.split(/[^a-z]+/i);
+		document.write(myFruitArray.join("<br />"));
+	</script>
+-->
+<!-- The replace() Method with Regular Expressions.
+	<script>
+		// var myString = "1999, 2000, 2001";
+		// var myRegExp = /(\d{4})/g;
+		var myString = "'Hello World' said Mr. O'Connerly. He then said 'My Name is O'Connerly, yes that's right, O'Connerly'.";
+		var myRegExp = /'\B|\B'/g
+		myString = myString.replace(myRegExp, "\"");
+		console.log(myString);
+	</script>
+-->
+<!-- The search() Method with Regular Expressions.
+	<script>
+		var myString = "Beginning JavaScript, Beginning Java 2, Professional JavaScript.";
+		var myRegExp = /\bJava\b/i;
+		console.log(myString.search(myRegExp));
+	</script>
+-->
+<!-- The match() Method with Regular Expressions.
+	<script>
+		var myString = "The years were 1999, 2000 and 2001";
+		var myRegExp = /\b\d{4}\b/g;
+		var myMatchArray = myString.match(myRegExp);
+		if(myMatchArray){
+			document.write(myMatchArray.join("<br />"));
+		}
+	</script>
+-->
+<!-- Splitting HTML.
+	<script>
+		function init(){
+			var myString = "<table align=\"center\"><tr><td>";
+			myString += "Hello World</td></tr></table>";
+			myString += "<br /><h2>Heading</h2>";
+			document.formRegExp.txaHTML.value = myString;
+		}
+		function splitHTML(html){
+			var myRegExp = /<[^>\r\n]+>|[^<>\r\n]+/g;
+			document.formRegExp.txaHTML.value = html.match(myRegExp).join("\r\n");
+		}
+		window.onload = init;
+	</script>
+	<form name="formRegExp">
+		<textarea name="txaHTML" rows="20" cols="40"></textarea>
+		<input name="btnSplit" type="button" value="Split HTML" onclick="splitHTML(document.formRegExp.txaHTML.value)" />
+	</form>
+-->
+<!-- Form Validation Module.
+	<script>
+		function isValidTel(tel){
+			var telRegExp = /^(\+\d{1,3} ?)?(\(\d{2,5}\)|\d{2,5}) ?\d{3,4} ?\d{0,7}( (x|xtn|ext|extn|pax|pbx|extension)?\.? ?\d{2,5})?$/i
+			return telRegExp.test(tel);
+		}
+		function isValidPost(post){
+			var postRegExp = /^(\d{5}(-\d{4})?)|(([a-z][a-z]?\d\d?|[a-z][a-z]?\d[a-z]) ?\d[a-z]{2})$/i;
+			return postRegExp.test(post);
+		}
+		function isValidEmail(email){
+			var emailRegExp = /^([a-z0-9]([\w\-]*\.?[a-z0-9])?)+@([a-z0-9]([\w\-]*[a-z0-9])?\.)+[a-z]{2,4}$/i;
+			return false;
+		}
+	</script>
+	<form name="formRegExp">
+		<p>
+			<input id="txtString" name="txtString" type="text" size="80" />
+		</p>
+		<p>
+			<input id="btnValidTel" name="btnValidTel" type="button" value="Is Valid Telephone Number?" onclick="alert('Is valid is ' + isValidTel(document.formRegExp.txtString.value) + '.')" />
+			<input id="btnValidPost" name="btnValidPost" type="button" value="Is Valid Postal Code?" onclick="alert('Is valid is ' + isValidPost(document.formRegExp.txtString.value) + '.')" />
+			<input id="btnValidEmail" name="btnValidEmail" type="button" value="Is Valid Email?" onclick="alert('Is valid is ' + isValidEmail(document.formRegExp.txtString.value) + '.')" />
+		</p>
+	</form>
+-->
+<!-- Exercises 1.
+	<script>
+		var myString = "This sentence has has a fault and and we need to fix it.";
+		// var myRegExp = /(\b\w+\b) \1/g;
+		// var myRegExp = /(\b\w+\b) (?=[^\1]*\1)/g;
+		// var myRegExp = /(\b\w+\b)( \1)+/g
+		// myString = myString.replace(myRegExp, "$1");
+		// console.log(myString);
+
+		var myRegExp = new RegExp("(\\b\\w+\\b) \\1", "g");
+		myString = myString.replace(myRegExp, "$1");
+		console.log(myString);
+	</script>
+-->
+<!-- Exercises 2.
+	<script>
+		var myString = "A dog walked in off a street and ordered a finest beer.";
+		myString = myString.replace(/\ba\b/g, "the").replace(/\bA\b/g, "The");
+		console.log(myString);
+	</script>
+-->
+<!-- Exercises 3.
+	<script>
+		var myWords = [];
+		var myRegExp = new RegExp();
+		var myNewWord = "salad";
+		myWords.push("choc");
+		myWords.push("chocolate");
+		myWords.push("chocoholic");
+		myWords.push("candy");
+		myWords.push("sugar candy");
+		myRegExp.compile("\\b(" + myWords.join("|") + ")\\b", "gi");
+		var myString = "Mmm, I love chocolate, I'm a chocoholic. I love candy too, sweet, sugar candy.";
+		myString = myString.replace(myRegExp, "sala");
+		console.log(myString);
+	</script>
+-->
+<!-- Exercises 4.
+	<script>
+		var arr = ["Merry", "Jim", "Will"];
+		var mod = "{2} fucking {0} so high，{1} is comming.";
+		var regexp = new RegExp("{(\\d)}", "g");
+		var str = mod.replace(regexp, function(sub, dol){
+			if(parseInt(dol)){
+				return arr[dol];
+			}
+		});
+		console.log(str);
+	</script>
 -->
 </body>
 </html>
