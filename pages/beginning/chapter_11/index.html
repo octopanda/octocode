@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>Index</title>
+</head>
+<body>
+<!-- The Cookie String.
+	<script>
+		var expires = new Date();
+		expires.setMonth(expires.getMonth() + 3);
+		cookieStr = "username=william_k_han;expires=" + expires.toUTCString();
+		//cookieStr += ";path=/octocode/path";	// path
+		//cookieStr += ";domain=domain.com";		// domain
+		//cookieStr += ";secure=true";			// secure
+		document.cookie = cookieStr;
+		function getCookieValue(name){
+			var regexp = new RegExp("\\b" + name + "=[^;]+", "gi");
+			return document.cookie.match(regexp)[0].split("=")[1];
+		}
+		alert("Hello World, " + getCookieValue("username") + "! ");
+	</script>
+-->
+<!-- Creating a Cookie.
+	<script>
+		function setCookie(name, value, expires, path){
+			value = escape(value);
+			if(!expires){
+				var now = new Date();
+				now.setMonth(now.getMonth() + 6);
+				expires = now.toUTCString();
+			}
+			path = path ? ";path=" + path : "";
+			document.cookie = name + "=" + value + ";expires=" + expires + path;
+		}
+		setCookie("Name", "Bob");
+		setCookie("Age", "101");
+		setCookie("FirstVisit", "10 May 2007");
+		var now = new Date();
+		now.setMonth(now.getMonth() + 12);
+		setCookie("username", "HK", now.toUTCString(), "/octocode");
+		alert(document.cookie);
+	</script>
+-->
+<!-- Getting a Cookie's Value.
+	<script>
+		console.log(document.cookie);
+		function getCookie(name){
+	//		return unescape(document.cookie.replace(new RegExp("^.*\\b" + name + "=([^;]+).*$", "i"), "$1"));
+			var matchs = document.cookie.match(new RegExp("\\b" + name + "=[^;]+", "i"));
+			return unescape(matchs[0].split("=")[1]);
+		}
+		function getCookies(){
+			var cookies = {};
+	//		var matchs = document.cookie.match(/\b[^=;]+=[^;]+/gi);
+	//		for(var i = 0; i < matchs.length; i++){
+	//			var item = matchs[i].split("=");
+	//			cookies[item[0]] = item[1];
+	//		}
+			document.cookie.replace(/(\b[^=;]+)=([^;]+)/gi, function(sub, $1, $2){
+				cookies[$1] = unescape($2);
+			});
+			return cookies;
+		}
+		getCookies();
+	</script>
+-->
+<!-- What's New?
+	<script src="cookie.js"></script>
+	<script>
+		var lastUpdated = new Date(document.lastModified);
+		lastUpdated.setMinutes(lastUpdated.getMinutes() - lastUpdated.getTimezoneOffset());
+		console.log(lastUpdated);
+	</script>
+	<h1 align="center" style="top:auto;">Welcome to my website.</h1>
+	<div id="whatsNewDiv" align="center"></div>
+	<script>
+		var lastVisit = getCookie("lastVisit");
+		if(null != lastVisit){
+			lastVisit = new Date(lastVisit);
+		console.log("visit" + lastVisit);
+			if(lastVisit < lastUpdated){
+				document.getElementById("whatsNewDiv").innerHTML = "<a href=\"whatsNew.html\">Click To Find Out What's New</a>"
+			}
+		}
+		var nowDate = new Date();
+		setCookie("lastVisit", nowDate.toUTCString());
+	</script>
+-->
+<!-- Check to see if cookies are enabled.
+	<script src="cookie.js"></script>
+	<script>
+		setCookie("testCookie", "Yes");
+		if(null == getCookie("testCookie")){
+			alert("This website requires cookies to function");
+		}
+	</script>
+-->
+</body>
+</html>

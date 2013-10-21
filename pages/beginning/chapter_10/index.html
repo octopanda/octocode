@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>Index</title>
+</head>
+<body>
+	<div id="result"></div>
+<!-- The World Time Method of the Date Object.
+	<script>
+		var localTime = new Date();
+		var result = "<p>UTC Time is " + localTime.toUTCString() + "</p>";
+		result += "<p>Local Time is " + localTime.toLocaleString() + "</p>";
+		result += "<p>Time Zone Offset is " + localTime.getTimezoneOffset() + "</p>";
+		result += "<p>Using toLocaleTimeString() gives: " + localTime.toLocaleTimeString() + "</p>";
+		result += "<p>Using toTimeString() gives: " + localTime.toTimeString() + "</p>";
+		result += "<p>Using toLocaleDateString() gives: " + localTime.toLocaleDateString() + "</p>";
+		result += "<p>Using toDateString() gives: " + localTime.toDateString() + "</p>"
+		document.getElementById("result").innerHTML = result;
+	</script>
+-->
+<!-- Setting and Getting a Date Object’s UTC Date and Time.
+	<script>
+		var myDate = new Date();
+		myDate.setUTCHours(12);
+		myDate.setUTCMinutes(0);
+		myDate.setUTCSeconds(0);
+		var result = "<p>" + myDate.toUTCString() + "</p>";
+		var result = "<p>" + myDate.toLocaleString() + "</p>";
+		document.getElementById("result").innerHTML = result;
+	</script>
+-->
+<!-- World Time Converter.
+	<script>
+		var timeDiff;
+		var selectedCity;
+		function updateTimeZone(){
+			var lstCity = document.formDate.lstCity;
+			timeDiff = lstCity.options[lstCity.selectedIndex].value;
+			selectedCity = lstCity.options[lstCity.selectedIndex].text;
+			updateTime();
+		}
+		function getTimeString(dateObject){
+			var timeString;
+			var hours = dateObject.getHours();
+			var minutes = dateObject.getMinutes();
+			var seconds = dateObject.getSeconds();
+			if(hours < 10){
+				hours = "0" + hours;
+			}
+			if(minutes < 10){
+				minutes = "0" + minutes;
+			}
+			if(seconds < 10){
+				seconds = "0" + seconds;
+			}
+			timeString = hours + ":" + minutes + ":" + seconds;
+			return timeString;
+		}
+		function updateTime(){
+			var nowTime = new Date();
+			var result = "<p>Local Time is " + getTimeString(nowTime) + "</p>";
+			nowTime.setMinutes(nowTime.getMinutes() + nowTime.getTimezoneOffset() + parseInt(timeDiff) + (document.formDate.chkDaylight.checked ? 60 : 0));
+			result += "<p>" + selectedCity + " time is " + getTimeString(nowTime) + "</p>";
+			document.getElementById("result").innerHTML = result;
+		}
+		window.onload = function(){
+			updateTimeZone();
+			window.setInterval(updateTime, 1000);
+		}
+	</script>
+	<div id="result"></div>
+	<form name="formDate">
+		<select name="lstCity" size="5" onchange="updateTimeZone()">
+			<option value="60" selected="selected">Berlin</option>
+			<option value="330">Bombay</option>
+			<option value="0">London</option>
+			<option value="180">Moscow</option>
+			<option value="-300">New York (EST)</option>
+			<option value="60">Paris</option>
+			<option value="-480">San Francisco (PST)</option>
+			<option value="600">Sydney</option>
+		</select>
+		<p>
+			It's summertime in the selected city and its country adjusts for summertime daylight saving
+			<input name="chkDaylight" type="checkbox" onclick="return updateTime()" />
+		</p>
+	</form>
+-->
+<!-- One-Shot Timer.
+	<script>
+		var timerID;
+		function window_onload(){
+			timerID = setTimeout("alert('Times Up!');", 3000);
+			console.log("Timer Set");
+		}
+		function stopTimer(){
+			clearTimeout(timerID);
+			console.log("Timer has been cleared");
+		}
+		window.onload = window_onload();
+	</script>
+	<form name="formTimer">
+		<input name="btnStopTimer" type="button" value="Stop Timer" onclick="stopTimer()" />
+	</form>
+-->
+<!-- Updating a Banner Advertisement.
+	<div id="banner" style="border:1px solid #ccc;width:200px;height:200px;">Banner</div>
+	<input type="button" value="Switch Control" onclick="switchCon()" />
+	<script>
+		var index = 0;
+		var num = 3;
+		var run = true;
+		var switchIndex = -1;
+		function switchBg(){
+			index++;
+			switch(index % 3){
+				case 0:
+					document.getElementById("banner").style.backgroundColor = "khaki";
+					break;
+				case 1:
+					document.getElementById("banner").style.backgroundColor = "lightblue";
+					break;
+				case 2:
+					document.getElementById("banner").style.backgroundColor = "lightgreen";
+					break;
+				default:
+					document.getElementById("banner").style.backgroundColor = "khaki";
+			}
+			if(index >= 3){
+				index = 0;
+			}
+			if(run){
+				switchIndex = window.setTimeout(switchBg, 1000);
+			}
+		}
+		function switchCon(){
+			if(run){
+				if(switchIndex != -1){
+					window.clearTimeout(switchIndex);
+				}
+				run = false;
+			}else{
+				run = true;
+				switchBg();
+			}
+		}
+		window.onload = switchBg();
+	</script>
+-->
+</body>
+</html>
