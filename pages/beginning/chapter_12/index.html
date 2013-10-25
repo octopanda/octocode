@@ -6,6 +6,322 @@
 	<title>Index</title>
 </head>
 <body>
-
+<!-- Finding Elements or an Element.
+	<style type="text/css">
+		table{border-collapse:collapse;}
+		td{border:1px solid #ccc;padding:8px 16px;}
+	</style>
+	<h1 id="heading1">My Heading</h1>
+	<p id="paragraph1">This is some text in a paragraph</p>
+	<script>
+		alert(document.getElementById("heading1"));
+	</script>
+	<span>Below is a table...</span>
+	<table>
+		<tr>
+			<td>Row 1 Cell 1</td>
+			<td>Row 1 Cell 2</td>
+		</tr>
+		<tr>
+			<td>Row 2 Cell 1</td>
+			<td>Row 2 Cell 2</td>
+		</tr>
+	</table>
+	<script>
+		var tdElement = document.getElementsByTagName("td").item(0);
+		tdElement.style.color = "red";
+	</script>
+	<script>
+		var tdElements = document.getElementsByTagName("td");
+		for(var i = 0; i < tdElements.length; i++){
+			tdElements[i].style.color = (i % 2 == 0 ? "red" : "blue");
+		}
+	</script>
+-->
+<!-- Creating Elements and Text.
+	<script>
+		var pElement = document.createElement("p");
+		var text = document.createTextNode("This is some text.");
+		document.body.appendChild(pElement);
+		pElement.appendChild(text);
+	</script>
+-->
+<!-- Property of the Document Object: Getting the Document's Root Element.
+	<script>
+		console.log(document.documentElement);
+	</script>
+-->
+<!-- The Element Object.
+	<p id="paragraph1">This is some text.</p>
+	<script>
+		var container = document.documentElement;
+		alert(container.tagName);
+		var pElement = document.getElementById("paragraph1");
+		pElement.setAttribute("align", "center");
+		alert(pElement.getAttribute("align"));
+		pElement.removeAttribute("align");
+	</script>
+-->
+<!-- The Node Object: Navigating the DOM.
+	<h1 id="heading1">My Heading</h1>
+	<p id="paragraph1">This is some text in a paragraph.</p>
+	<script>
+		var h1Element = document.getElementById("heading1");
+		h1Element.style.color = "red";
+		var pElement;
+		pElement = 1 == h1Element.nextSibling.nodeType ? h1Element.nextSibling : h1Element.nextSibling.nextSibling;
+		pElement.style.color = "blue";
+	</script>
+-->
+<!-- Navigating Your HTML Document Using the DOM.
+	<h1 id="heading1">My Heading</h1>
+	<p id="paragraph1">This is some text in a paragraph.</p>
+	<script>
+		var htmlElement;	// htmlElement stores reference to <html>
+		var headElement;	// headElement stores reference to <head>
+		var bodyElement;	// bodyElement stores reference to <body>
+		var h1Element;		// h1Element stores reference to <h1>
+		var pElement;		// pElement stores reference to <p>
+		htmlElement = document.documentElement;
+		console.log(htmlElement.tagName);
+		headElement = htmlElement.firstChild;
+		console.log(headElement.tagName);
+		if(headElement.nextSibling.nodeType == 1){
+			bodyElement = headElement.nextSibling;
+		}else{
+			bodyElement = headElement.nextSibling.nextSibling;
+		}
+		console.log(bodyElement.tagName);
+		h1Element = document.getElementById("heading1");
+		console.log(h1Element.tagName);
+		h1Element.style.fontFamily = "Arial";
+		if(h1Element.nextSibling.nodeType == 1){
+			pElement = h1Element.nextSibling;
+		}else{
+			pElement = h1Element.nextSibling.nextSibling;
+		}
+		console.log(pElement.tagName);
+		pElement.style.fontFamily = "Arial";
+		if(pElement.previousSibling.nodeType == 1){
+			h1Element = pElement.previousSibling;
+		}else{
+			h1Element = pElement.previousSibling.previousSibling;
+		}
+		console.log(h1Element.tagName);
+		h1Element.style.color = "red";
+	</script>
+-->
+<!-- Using the style Property.
+	<script>
+		var newText = document.createTextNode("My Heading");
+		var newElem = document.createElement("h1");
+		newElem.appendChild(newText);
+		newElem.setAttribute("style", "color:red;");
+		document.body.appendChild(newElem);
+		newText = document.createTextNode("This is some text in a pargraph.");
+		newElem = document.createElement("p");
+		newElem.appendChild(newText);
+		document.body.appendChild(newElem);
+	</script>
+-->
+<!-- Using the style Object.
+	<style>
+		#divAdvert{font:12pt arial;}
+	</style>
+	<script>
+		function divAdvert_onMouseOver(){
+			var divAdvert = document.getElementById("divAdvert");
+			divAdvert.style.fontStyle = "italic";
+			divAdvert.style.textDecoration = "underline";
+		}
+		function divAdvert_onMouseOut(){
+			var divAdvert = document.getElementById("divAdvert");
+			divAdvert.style.fontStyle = "normal";
+			divAdvert.style.textDecoration = "none";
+		}
+	</script>
+	<div id="divAdvert" onmouseover="divAdvert_onMouseOver()" onmouseout="divAdvert_onMouseOut()">
+		Here is an advertisement.
+	</div>
+-->
+<!-- Using the className Property.
+	<style>
+		.defaultStyle{font:normal 12pt arial;text-decoration:none;}
+		.newStyle{font:italic 12pt arial;text-decoration:underline;}
+	</style>
+	<script>
+		function divAdvert_onMouseOver(){
+			var divAdvert = document.getElementById("divAdvert");
+			divAdvert.className = "newStyle";
+		}
+		function divAdvert_onMouseOut(){
+			var divAdvert = document.getElementById("divAdvert");
+			divAdvert.className = "defaultStyle";
+		}
+	</script>
+	<div id="divAdvert" class="defaultStyle" onmouseover="divAdvert_onMouseOver()" onmouseout="divAdvert_onMouseOut()">
+		Here is an advertisement.
+	</div>
+-->
+<!-- Moving an Element Around.
+	<style>
+		#divBox{position:absolute;background-color:silver;width:180px;height:180px;text-align:right;}
+		input{width:100px;margin-right:12px;}
+	</style>
+	<script>
+		function moveBox(){
+			var divBox = document.getElementById("divBox");
+			var inputLeft = document.getElementById("inputLeft");
+			var inputTop = document.getElementById("inputTop");
+			divBox.style.left = parseInt(inputLeft.value) + "px";
+			divBox.style.top = parseInt(inputTop.value) + "px";
+		}
+	</script>
+	<div id="divBox">
+		<form id="formBoxController" action="" onsubmit="moveBox(); return false;">
+			<p>
+				<label>Left:</label>
+				<input id="inputLeft" type="text" />
+			</p>
+			<p>
+				<label>Top:</label>
+				<input id="inputTop" type="text" />
+			</p>
+			<p>
+				<input type="submit" value="Move The Box" />
+			</p>
+		</form>
+	</div>
+-->
+<!-- Example: Animated Advertisement.
+	<style>
+		#divAdvert{position:absolute;padding:20px;top:0px;left:0px;font:bold 24px Arial;color:white;background-color:#f60;text-align:center;cursor:pointer;z-index:2;}
+		#divBg{position:absolute;background-color:#f1f1f1;z-index:1;}
+	</style>
+	<script>
+		var advertAnimate;
+		var endPoint = {
+			x: 394,
+			y: 394
+		};
+		var startPoint = {};
+		var direction = false;
+		function doAnimation(){
+			var divAdvert = document.getElementById("divAdvert");
+			var curPoint = {
+				x: divAdvert.offsetLeft,
+				y: divAdvert.offsetTop
+			};
+			if(direction){
+				divAdvert.style.left = curPoint.x - 2 + "px";
+				divAdvert.style.top = curPoint.y - 2 + "px";
+				if(curPoint.x - 2 < startPoint.x || curPoint.y - 2 < startPoint.y){
+					direction = false;
+				}
+			}else{
+				divAdvert.style.left = curPoint.x + 2 + "px";
+				divAdvert.style.top = curPoint.y + 2 + "px";
+				if(curPoint.x + 2 + divAdvert.clientWidth > endPoint.x || curPoint.y + 2 + divAdvert.clientHeight > endPoint.y){
+					direction = true;
+				}
+			}
+		}
+		function stopAnimation(){
+			if(advertAnimate){
+				clearInterval(advertAnimate);
+				advertAnimate = undefined;
+			}else{
+				advertAnimate = setInterval(doAnimation, 20);
+			}
+		}
+		window.onload = function(){
+			var divAdvert = document.getElementById("divAdvert");
+			var divBg = document.getElementById("divBg");
+			startPoint.x = divAdvert.offsetLeft;
+			startPoint.y = divAdvert.offsetTop;
+			divBg.style.left = divAdvert.offsetLeft + "px";
+			divBg.style.top = divAdvert.offsetTop + "px";
+			divBg.style.width = endPoint.x - divBg.offsetLeft + "px";
+			divBg.style.height = endPoint.y - divBg.offsetTop + "px";
+			advertAnimate = setInterval(doAnimation, 20);
+		};
+	</script>
+	<div id="divAdvert" onclick="stopAnimation()">Here<br />Is<br />An<br />Advertisement.</div>
+	<div id="divBg"></div>
+-->
+<!-- Using the Event Model.
+	<style>
+		.underline{color:red;text-decoration:underline;}
+	</style>
+	<script>
+		function handleEvent(ev){
+			ev = window.event || ev;					// window.event(IE)
+			ev.target = ev.srcElement || ev.target;		// ev.target(IE)
+			if("P" == ev.target.tagName){
+				if(ev.type == "mouseover"){
+					ev.target.className = "underline";
+				}
+				if(ev.type == "mouseout"){
+					ev.target.className = "";
+				}
+			}
+			if(ev.type == "click"){
+				alert("You clicked the mouse button at the X:" + ev.clientX + " and Y:" + ev.clientY + " coordinates.");
+			}
+		}
+		document.onmouseover = handleEvent;
+		document.onmouseout = handleEvent;
+		document.onclick = handleEvent;
+	</script>
+	<p>This is paragraph 1.</p>
+	<p>This is paragraph 2.</p>
+	<p>This is paragraph 3.</p>
+-->
+<!-- Writing Cross-Browser DHTML.
+	<style>
+		.tab-idx{background-color:#E4E2D5;overflow:hidden;*zoom:1;}
+		.tab-idx div{float:left;padding:10px 20px;font:bold 14px arial;cursor:pointer;}
+		.tab-idx .hover{border:1px solid #316ac5;background-color:#c1d2ee;padding:9px 19px;}
+		.tab-idx .click{border:1px solid #facc5a;background-color:#f9e391;padding:9px 19px;}
+		.tab-cnt{background-color:#f1f1f1;min-height:300px;_height:300px;padding:20px;}
+	</style>
+	<script>
+		function handleEvent(event){
+			event = window.event || event;
+			event.target = event.srcElement || event.target;
+			if("mouseover" == event.type && "item" == event.target.className){
+				event.target.className = "hover";
+			}
+			if("mouseout" == event.type && "hover" == event.target.className){
+				event.target.className = "item";
+			}
+			if("click" == event.type){
+				if("hover" == event.target.className){
+					tabIdxs = document.getElementById("tab-idx").getElementsByTagName("div");
+					for (var i = 0; i < tabIdxs.length; i++) {
+						tabIdxs[i].className = "item";
+					};
+					event.target.className = "click";
+					tabContent = document.getElementById("tab-cnt");
+					tabContent.innerHTML = "";
+					var newCntText = document.createTextNode("Description for Tab " + event.target.id.substr(event.target.id.lastIndexOf("-") + 1) + "!");
+					var newCnt = document.createElement("div");
+					newCnt.appendChild(newCntText);
+					newCnt.className = "tab-cnt";
+					tabContent.appendChild(newCnt);
+				}
+			}
+		}
+		document.onclick = handleEvent;
+		document.onmouseover = handleEvent;
+		document.onmouseout = handleEvent;
+	</script>
+	<div id="tab-idx" class="tab-idx">
+		<div id="tab-1" class="item">Tab 1</div>
+		<div id="tab-2" class="item">Tab 2</div>
+		<div id="tab-3" class="item">Tab 3</div>
+	</div>
+	<div id="tab-cnt"></div>
+-->
 </body>
 </html>

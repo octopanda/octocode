@@ -11,17 +11,9 @@ function setCookie(name, value, expires, path){
 
 function getCookie(name){
 	var cookies = {};
-	var matchs = document.cookie.match(/\b[^=;]+=[^;]+/gi);
-	if(matchs <= 0) {
-		return null;
-	}
-	for(var i = 0; i < matchs.length; i++){
-		var item = matchs[i].split("=");
-		cookies[item[0]] = item[1];
-	}
-	if(name){
-		return cookies[name];
-	}
-	return cookies;
+	document.cookie.replace(/(\b[^=;]+)=([^;]+)/gi, function(sub, $1, $2){
+		cookies[$1] = unescape($2);
+		return;
+	});
+	return name ? cookies[name] : cookies;
 }
-getCookie();
