@@ -323,5 +323,174 @@
 	</div>
 	<div id="tab-cnt"></div>
 -->
+<!-- Retrieving an XML File in IE.
+	<script>
+		function createDocument(){
+			var xmlDoc;
+			if(window.ActiveXObject){
+				var versions = [
+					"Msxml2.DOMDocument.6.0",
+					"Msxml2.DOMDocument.3.0"
+				];
+				for(var i = 0; i < versions.length; i++){
+					try{
+						xmlDoc = new ActiveXObject(versions[i]);
+						return xmlDoc;
+					}catch(ex){}
+				}
+			}
+			return null;
+		}
+		function xmlDoc_readyStateChange(){
+			// Check for the readyState. If it's 4, it's loaded!
+			if(4 == xmlDoc.readyState){
+				alert("XML file loaded!");
+			}
+		}
+		var xmlDoc = createDocument();
+		xmlDoc.async = false;	// asynchronous
+		xmlDoc.onreadystatechange = xmlDoc_readyStateChange;
+		xmlDoc.load("motd.xml");
+	</script>
+-->
+<!-- Retrieving an XML File in Firefox and Opera.
+	<script>
+		function xmlDoc_load(){
+			alert("XML is loaded!");
+		}
+		var xmlDoc = document.implementation.createDocument("", "", null);
+		xmlDoc.onload = xmlDoc_load;
+		xmlDoc.load("motd.xml");
+	</script>
+-->
+<!-- Retrieving an XML File (Cross-Browser).
+	<script>
+		function createDocument(){
+			var xmlDoc;
+			if(window.ActiveXObject){
+				var versions = [
+					"Msxml2.DOMDocument.6.0",
+					"Msxml2.DOMDocument.3.0"
+				];
+				for (var i = 0; i < versions.length; i++) {
+					try{
+						xmlDoc = new ActiveXObject(versions[i]);
+						return xmlDoc;
+					}catch(ex){}
+				}
+			}else if(document.implementation && document.implementation.createDocument){
+				xmlDoc = document.implementation.createDocument("", "", null);
+				return xmlDoc;
+			}
+			return null;
+		}
+		var xmlDoc = createDocument();
+		xmlDoc.async = false;
+		xmlDoc.load("motd.xml");
+	</script>
+-->
+<!-- Example: Displaying a Daily Message.
+	<script>
+		function createDocument(){
+			var xmlDoc;
+			if(window.ActiveXObject){
+				var versions = [
+					"Msxml2.DOMDocument.6.0",
+					"Msxml2.DOMDocument.3.0"
+				];
+				for (var i = 0; i < versions.length; i++) {
+					try{
+						xmlDoc = new ActiveXObject(versions[i]);
+						return xmlDoc;
+					}catch(ex){}
+				}
+			}else if(document.implementation && document.implementation.createDocument){
+				xmlDoc = document.implementation.createDocument("", "", null);
+				return xmlDoc;
+			}
+			return null;
+		}
+		function getDailyMessage(xmlDoc){
+			var messages = xmlDoc.getElementsByTagName("daily");
+			var dateObj = new Date();
+			var today = dateObj.getDay();
+			return messages[today].firstChild.nodeValue;
+		}
+		window.onload = function(){
+			var xmlDoc = createDocument();
+			xmlDoc.async = false;
+			xmlDoc.load("motd.xml");
+			document.getElementById("messageContainer").innerHTML = getDailyMessage(xmlDoc);
+		}
+	</script>
+	<div id="messageContainer"></div>
+-->
+<style>
+	table{ margin:0 auto; width:60%; border-collapse:collapse; font:normal 14px/20px "Microsoft YaHei"; }
+	th, td { border:1px solid #ccc; padding:8px 16px; text-align:center; background-color:#f1f1f1; }
+	th { color:#fff; font-size:15px; background-color:#f60; }
+</style>
+<script>
+	function createDocument(){
+		var xmlDoc;
+		if(window.ActiveXObject){
+			var versions = [
+				"MSXML2.DOMDocument.6.0",
+				"MSXML2.DOMDocument.3.0"
+			];
+			for (var i = 0; i < versions.length; i++) {
+				try{
+					xmlDoc = new ActiveXObject(versions[i]);
+					return xmlDoc;
+				}catch(ex){}
+			};
+		}else if(document.implementation && document.implementation.createDocument){
+			xmlDoc = document.implementation.createDocument("", "", null);
+			return xmlDoc;
+		}
+		return null;
+	}
+	function displayAnimals(nodes){
+		var table = document.createElement("table");
+		var thead = document.createElement("thead");
+		var thr = document.createElement("tr");
+		for (var i = 0; i < nodes[0].childNodes.length; i++) {
+			var cur = nodes[0].childNodes[i];
+			if (1 == cur.nodeType) {
+				var th = document.createElement("th");
+				var thData = document.createTextNode(cur.nodeName);
+				th.appendChild(thData);
+				thr.appendChild(th);
+			}
+		}
+		thead.appendChild(thr);
+		var tbody = document.createElement("tbody");
+		for (var i = 0; i < nodes.length; i++) {
+			var tr = document.createElement("tr");
+			for (var j = 0; j < nodes[i].childNodes.length; j++) {
+				var cur = nodes[i].childNodes[j];
+				if (1 == cur.nodeType) {
+					var td = document.createElement("td");
+					var tdData = document.createTextNode(cur.firstChild.nodeValue);
+					td.appendChild(tdData);
+					if("color" == cur.nodeName){
+						td.style.color = cur.firstChild.nodeValue;
+					}
+					tr.appendChild(td);
+				}
+			}
+			tbody.appendChild(tr);
+		}
+		table.appendChild(thead);
+		table.appendChild(tbody);
+		document.body.appendChild(table);
+	}
+	window.onload = function(){
+		var xmlDoc = createDocument();
+		xmlDoc.async = false;
+		xmlDoc.load("animals.xml");
+		displayAnimals(xmlDoc.getElementsByTagName("dog"));
+	};
+</script>
 </body>
 </html>
