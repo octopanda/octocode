@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>Index</title>
+</head>
+<body>
+<!-- Checking for and Embedding Plug-ins (Non-IE Browers.);
+	<script>
+		if(window.navigator.mimeTypes["application/x-shockwave-flash"] && window.navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin){
+			document.write("Plugin ‘application/x-shockwave-flash’ enabled.");
+		}else{
+			document.write("Plugin ‘application/x-shockwave-flash’ disabled.");
+		}
+	</script>
+-->
+<!-- Adding a Plug-in to the Page.
+	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="1800" height="606">
+		<param name="menu" value="true">
+		<param name="allowfullscreen" value="true">
+		<param name="wmode" value="transparent">
+		<param name="scale" value="noscale">
+		<param name="allowScriptAccess" value="always">
+		<param name="align" value="t">
+		<param name="movie" value="http://pic.xoyo.com/cms/mj/2013/08/21/index.swf">
+		<param name="quality" value="high">
+		<embed src="http://pic.xoyo.com/cms/mj/2013/08/21/index.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="1800" height="606" wmode="transparent">
+	</object>
+-->
+<!-- Using Plug-ins and ActiveX Controls. -->
+	<script>
+		function btnPlay_onclick(){
+			document.audioPlayer.Play();
+		}
+		function btnStop_onclick(){
+			document.audioPlayer.Stop();
+		}
+		window.onload = function(){
+			var pluginInstalled = false;
+			if(!window.ActiveXObject){
+				for (var i = 0; i < navigator.plugins.length; i++) {
+					var pluginName = navigator.plugins[i].name.toLowerCase();
+					if(pluginName.indexOf("quicktime") > -1){
+						pluginInstalled = true;
+						break;
+					}
+				};
+			}else{
+				pluginInstalled = document.audioPlayer.readyState == 4 ? true : false;
+			}
+			if(!pluginInstalled){
+				document.audioForm.btnPlay.disabled = true;
+				document.audioForm.btnStop.disabled = true;
+				alert("You need Quicktime to play the audio file!");
+			}
+		}
+	</script>
+	<object id="audioPlayer" classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="0" height="0">
+		<param name="src" value="sound1.mp3" />
+		<embed name="audioPlayer" width="0" height="0" type="audio/mpeg" src="sound1.mp3" pluginspage="www.apple.com/quicktime/download" enablejavascript="true" />
+	</object>
+	<form id="audioForm" name="audioForm" action="">
+		<input id="btnPlay" name="btnPlay" type="button" value="Play" onclick="btnPlay_onclick()" />
+		<input id="btnStop" name="btnStop" type="button" value="Stop" onclick="btnStop_onclick()" />
+	</form>
+</body>
+</html>
