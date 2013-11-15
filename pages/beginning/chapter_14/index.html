@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="author" content="octopanda" />
+	<title>Index</title>
+</head>
+<body>
+<!-- Using the XMLHttpRequest Object.
+	<script>
+		function createXMLHttpRequest(){
+			var xhr = null;
+			if(window.XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+				return xhr;
+			}else if(window.ActiveXObject){
+				var versions = [
+					"MSXML2.XmlHttp.6.0",
+					"MSXML2.XmlHttp.3.0"
+				];
+				for (var i = 0; i < versions.length; i++) {
+					try{
+						xhr = new ActiveXObject(versions[i]);
+						return xhr;
+					}catch(ex){}
+				}
+			}
+			return xhr;
+		}
+		var xhr = createXMLHttpRequest();
+		xhr.open("GET", "http://localhost:8080/octocode/chapter_14/data.txt", false);
+		xhr.send(null);
+		if(xhr.status == 200){
+			alert("The text file was found!");
+		}else{
+			alert("The server returned a status code of " + xhr.status);
+		}  -
+	</script>
+-->
+<!-- Asynchronous Requests.
+	<script>
+		function createXMLHttpRequest(){
+			var xhr = null;
+			if(window.XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+				return xhr;
+			}else if(window.ActiveXObject){
+				var versions = [
+					"MSXML2.XmlHttp.6.0",
+					"MSXML2.XmlHttp.3.0"
+				];
+				for (var i = 0; i < versions.length; i++) {
+					try{
+						xhr = new ActiveXObject(versions[i]);
+						return xhr;
+					}catch(ex){}
+				}
+			}
+			return xhr;
+		}
+		var xhr = createXMLHttpRequest();
+		function xhrReadyStateChange(){
+			if(xhr.readyState == 4){
+				if(xhr.status == 200){
+					console.log(xhr);
+				}else{
+					alert("The server returned a status code of " + xhr.status);
+				}
+			}
+		}
+		xhr.open("GET", "http://localhost:8080/octocode/chapter_14/data.txt", true);
+		xhr.onreadystatechange = xhrReadyStateChange;
+		xhr.send(null);
+	</script>	
+-->
+<!-- Creating a Simple Ajax Module.
+	<script>
+		function HttpRequest(url, callback){
+			this.request = this.createXMLHttpRequest();
+			this.request.open("GET", url, true);
+			var that = this;
+			function request_readystatechange(){
+				if(that.request.readyState == 4){
+					if(that.request.status == 200){
+						callback(that.request.responseText);
+					}else{
+						alert("An error occurred trying to contact the server.");
+					}
+				}
+			}
+			this.request.onreadystatechange = request_readystatechange;
+		}
+		HttpRequest.prototype.createXMLHttpRequest = function(){
+			var xhr = null;
+			if(window.XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+			}else{
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			return xhr;
+		};
+		HttpRequest.prototype.send = function(){
+			this.request.send(null);
+		};
+	</script>
+	<script>
+		var request = new HttpRequest("http://localhost:8080/octocode/chapter_14/data.txt", function(response){
+			alert(response);
+		});
+		request.send();
+	</script>
+-->
+<script>
+	function HttpRequest(url, callback){
+		this.request = this.createXMLHttpRequest();
+		this.request.open("GET", url, true);
+		var that = this;
+		function request_readystatechange(){
+			if(that.request.readyState == 4){
+				if(that.request.status == 200){
+					callback(that.request.responseText);
+				}else{
+					alert("An error occurred trying to contact the server.");
+				}
+			}
+		}
+		this.request.onreadystatechange = request_readystatechange;
+	}
+	HttpRequest.prototype.createXMLHttpRequest = function(){
+		var xhr = null;
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		}else{
+			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		return xhr;
+	};
+	HttpRequest.prototype.send = function(){
+		this.request.send(null);
+	};
+	function checkUsername(){
+		var username = document.getElementById("username").value;
+		if("" ==  username){
+			alert("Please enter a user name to check!");
+			return;
+		}
+		var request = new HttpRequest("/octocode/checkform?username=" + username, function(response){
+			var username = document.getElementById("username").value;
+			if(eval(response)){
+				alert("The username " + username + " is available!");
+			}else{
+				alert("We're sorry, but " + username + " is not available.");
+			}
+		});
+		request.send();
+	}
+	function checkEmail(){
+		var email = document.getElementById("email").value;
+		if("" == email){
+			alert("Please enter an email address to check!");
+			return;
+		}
+		var request = new HttpRequest("/octocode/checkform?email=" + email, function(response){
+			var email = document.getElementById("email").value;
+			if(eval(response)){
+				alert("The email " + email + " is currently not in use!");
+			}else{
+				alert("I'm sorry, but " + email + " is in use by another user.");
+			}
+		});
+		request.send();
+	}
+</script>
+<form>
+	<table>
+		<tr>
+			<td class="fieldname">Username: </td>
+			<td><input id="username" type="text" /></td>
+			<td><a href="javascript:checkUsername()">Check Availability</a></td>
+		</tr>
+		<tr>
+			<td class="fieldname">Email: </td>
+			<td><input id="email" type="text" /></td>
+			<td><a href="javascript:checkEmail()">Check Availability</a></td>
+		</tr>
+		<tr>
+			<td class="fieldname">Password</td>
+			<td><input id="password" type="password" /></td>
+			<td />
+		</tr>
+		<tr>
+			<td class="fieldname">Verify Password</td>
+			<td><input id="vpassword" type="password" /></td>
+			<td />
+		</tr>
+		<tr>
+			<td class="submit" colspan="2"><input type="submit" value="Submit" /></td>
+			<td />
+		</tr>
+	</table>
+</form>
+</body>
+</html>
